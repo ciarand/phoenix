@@ -1,0 +1,18 @@
+---
+# Common tasks across nodes
+
+- name: Make sure APT is up to date
+  apt: update_cache=yes upgrade=yes
+
+- name: Install common packages
+  apt : pkg={{ item }} state=installed
+  sudo: yes
+  with_items:
+    - mosh
+    - vim-gtk
+    - git
+    - bash
+
+- name: Remove .bashrc (we use .bash_profile)
+  file: path=~{{ ansible_user_id }}/.bashrc state=absent
+

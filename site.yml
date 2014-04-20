@@ -1,0 +1,16 @@
+- hosts: all
+  remote_user: ciarand
+  sudo: yes
+  roles:
+    - role: common
+
+- hosts: all
+  remote_user: ciarand
+  roles:
+    - role: rbenv
+    - role: ruby-multi
+      versions:
+        - 1.8.7-p375
+        - 1.9.3-p484
+        - 2.0.0-p353
+        - 2.1.0

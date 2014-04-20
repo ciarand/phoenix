@@ -1,0 +1,11 @@
+- name: Checks if target ruby is installed
+  command: "~{{ ansible_user_id }}/.rbenv/bin/rbenv versions"
+  register: ruby_installed_versions
+  changed_when: "ruby_installed_versions.stdout.find('{{ version }}') == -1"
+
+- name: Installs ruby
+  shell: cd; bash -lc "MAKEOPTS='' CONFIGURE_OPTS=--disable-install-rdoc rbenv install {{ version }}"
+  when: ruby_installed_versions|changed # only run when we've changed
+  # Takes no more than 600 secs on a small VM
+  async: 600
+  poll: 20
