@@ -28,6 +28,7 @@ TODO:
 * Disk encryption
 * Cron jobs (like refreshing this repo every day)
 * Alternative terminal?
+* rbenv-rehash and other important plugins
 
 Credits
 -------
