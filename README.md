@@ -35,7 +35,7 @@ Credits
 The `ruby`, `rbenv`, and `ruby-multi` playbooks are taken almost word-for-word
 from [ansible-rbenv-playbook][1].
 
-[1]: https://github.com/leucos/ansible-rbenv-playbook.
+[1]: https://github.com/leucos/ansible-rbenv-playbook
 
 License
 -------
