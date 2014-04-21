@@ -17,9 +17,9 @@
 
 #TODO setup a symlink from GOPATH whatever to ~/managed-bin
 - name: go get binaries
-  shell: cd; bash -lc "go get -u {{ item }}"
+  shell: cd; bash -lc "go get {{ item }}"
   with_items:
-    - "code.google.com/p/go.tools/cmd/..."
+    - code.google.com/p/go.tools/cmd/...
     - github.com/spf13/hugo
     - github.com/tools/godep
     - github.com/dinedal/textql
