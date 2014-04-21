@@ -10,7 +10,7 @@ of the base config and a working SSH connection. On a Mac it needs Homebrew
 
 I'm not your mother.
 
-[brew]: brew.sh
+[brew]: http://brew.sh
 
 Running
 -------
