@@ -1,19 +1,9 @@
 #!/usr/bin/env bash
 
-# Set my editor and git editor
 export EDITOR="vim"
 export GIT_EDITOR=$EDITOR
 
-export GOPATH=$HOME/code/go
-export GOROOT="$(go env GOROOT)"
-
-# use gh instead of git
-eval "$(gh alias -s)"
-
-# setup ssh-agent
-# eval "$(ssh-agent)"
-
-export PATH=~/bin:~/managed-bin:$PATH:/usr/local/Cellar/go/1.2.1/libexec/bin
+export PATH=~/bin:~/managed-bin:$PATH
 
 # include all files in .bash.d
 for f in ~/.bash.d/*; do source $f; done
