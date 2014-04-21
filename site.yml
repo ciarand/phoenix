@@ -21,3 +21,6 @@
 
     - role: go
       tags: ["go"]
+
+    - role: replication
+      tags: ["config"]

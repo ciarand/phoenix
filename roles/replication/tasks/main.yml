@@ -1,0 +1,10 @@
+---
+- name: make sure the ~/code/config dir exists
+  file: path=~{{ ansible_user_id }}/code/config state=directory
+
+- name: copy the current set of playbooks to the new machine
+  synchronize:  >
+    src={{ inventory_dir }}/../
+    dest=~{{ ansible_user_id }}/code/config
+    recursive=yes
+
