@@ -46,6 +46,6 @@
   file: dest=~{{ ansible_user_id }}/.bash.d/ state=directory
 
 - name: Installs rbenv bash file
-  copy: src=50_rbenv.bash dest=~{{ ansible_user_id }}/.bash.d/50_rbenv.bash mode=700 owner={{ ansible_user_id }}
+  copy: src=99_rbenv.bash dest=~{{ ansible_user_id }}/.bash.d/99_rbenv.bash mode=700 owner={{ ansible_user_id }}
 
 - include: plugins.yml
