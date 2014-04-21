@@ -7,10 +7,16 @@
 - hosts: all
   roles:
     - role: common
+
     - role: dotfiles
       tags: ["dotfiles"]
+
+    - role: editor
+      tags: ["dotfiles", "editor"]
+
     - role: rbenv
       tags: ["ruby", "rbenv"]
+
     - role: ruby-multi
       tags: ["ruby", "ruby-build", "ruby-install"]
       versions: # first is default

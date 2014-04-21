@@ -1,0 +1,30 @@
+# install vim dotfiles
+- name: install vimrc
+  template: src=dotfiles/{{ item.src }} dest=~{{ ansible_user_id }}/{{ item.dest }}
+  with_items:
+    - { src: 'vimrc', dest: '.vimrc' }
+
+- name: install vimrc.d
+  synchronize: src=dotfiles/{{ item.src }} dest=~/{{ item.dest }}
+  with_items:
+    - { src: 'vimrc.d/', dest: '.vimrc.d' }
+
+- name: Install fully featured vim in Debian
+  when: ansible_os_family == "Debian"
+  apt : pkg=vim-gtk state=installed
+  sudo: yes
+
+- name: Install fully featured vim in Darwin
+  when: ansible_os_family == "Darwin"
+  homebrew: >
+    name=vim
+    state=present
+    install_options=override-system-vi,with-client-server,with-lua,with-luajit,with-perl,with-python3,with-tlc
+
+- name: Grab Vundle
+  git: >
+    repo=git://github.com/gmarik/vundle.git
+    dest=~{{ ansible_user_id }}/.vim/bundle/vundle
+
+- name: Run PluginInstall
+  shell: cd; bash -lc "vim +PluginInstall +qall"
