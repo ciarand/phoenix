@@ -1,0 +1,11 @@
+- name: Creates plugin directory
+  file: path=~{{ ansible_user_id }}/.rbenv/plugins/ owner={{ ansible_user_id }} mode=0755 state=directory
+
+- name: Installs ruby-build
+  git: repo=git://github.com/sstephenson/ruby-build.git dest=~{{ ansible_user_id }}/.rbenv/plugins/ruby-build
+
+- name: Installs rbenv-gem-rehash
+  git: repo=git://github.com/sstephenson/rbenv-gem-rehash.git dest=~{{ ansible_user_id }}/.rbenv/plugins/rbenv-gem-rehash
+
+- name: Installs rbenv-binstubs
+  git: repo=git://github.com/ianheggie/rbenv-binstubs.git dest=~{{ ansible_user_id }}/.rbenv/plugins/rbenv-binstubs

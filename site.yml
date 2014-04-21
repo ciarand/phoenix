@@ -13,8 +13,8 @@
       tags: ["ruby", "rbenv"]
     - role: ruby-multi
       tags: ["ruby", "ruby-build", "ruby-install"]
-      versions:
-        - 1.8.7-p375
-        - 1.9.3-p484
-        - 2.0.0-p353
+      versions: # first is default
         - 2.1.0
+        - 2.0.0-p353
+        - 1.9.3-p484
+        - 1.8.7-p375

@@ -6,6 +6,7 @@
 - name: Installs ruby
   shell: cd; bash -lc "MAKEOPTS='' CONFIGURE_OPTS=--disable-install-rdoc rbenv install {{ version }}"
   when: ruby_installed_versions|changed # only run when we've changed
+  notify: Sets global ruby version
   # Takes no more than 600 secs on a small VM
   async: 600
   poll: 20

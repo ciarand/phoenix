@@ -48,9 +48,4 @@
 - name: Installs rbenv bash file
   copy: src=50_rbenv.bash dest=~{{ ansible_user_id }}/.bash.d/50_rbenv.bash mode=700 owner={{ ansible_user_id }}
 
-- name: Creates plugin directory
-  file: path=~{{ ansible_user_id }}/.rbenv/plugins/ owner={{ ansible_user_id }} mode=0755 state=directory
-
-- name: Installs ruby-build
-  git: repo=git://github.com/sstephenson/ruby-build.git dest=~{{ ansible_user_id }}/.rbenv/plugins/ruby-build
-
+- include: plugins.yml
