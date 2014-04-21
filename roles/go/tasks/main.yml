@@ -1,28 +1,50 @@
 ---
-- name: Add the Go bin script (sets up GOPATH, etc.) to .bash.d
-  copy: src=99_go.bash dest=~{{ ansible_user_id }}/.bash.d/ force=yes
-
 - name: Include the OS-specific vars file
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Register the current Go version (if any)
-  command: /usr/local/go/bin/go version
+  command: ~{{ ansible_user_id }}/src/go/bin/go version
   ignore_errors: yes
   register: go_version
   changed_when: false
 
-- name: Ensure there is a tarballs dir in ~
-  file: path=~{{ ansible_user_id }}/tarballs state=directory
-
-- name: Download the Go tarball
-  when: go_version|failed or go_version.stdout != go_version_target
-  get_url: url={{ go_download_location }}
-           dest=~{{ ansible_user_id }}/tarballs/{{ go_tarball }}
-           sha256sum={{ go_tarball_checksum }}
-
-- name: Extract the Go tarball if Go is not yet installed or if it is not the desired version
-  when: go_version|failed or go_version.stdout != go_version_target
+- name: install the prereqs for compiling the Go source on Debian
+  when: >
+    ansible_os_family == "Debian"
+    and (go_version|failed or go_version.stdout != go_version_target)
   sudo: yes
-  command: tar -C /usr/local -xf ~{{ ansible_user_id }}/tarballs/{{ go_tarball }}
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - gcc
+    - libc6-dev
+    - libc6-dev-i386
+    - mercurial
 
-- include: "go-get.yml"
+- name: install the prereqs for compiling the Go source on OS X
+  when: >
+    ansible_os_family == "Darwin"
+    and (go_version|failed or go_version.stdout != go_version_target)
+  homebrew: name={{ item }} state=present
+  with_items:
+    - mercurial
+
+- name: Make sure we have a ~/src folder
+  file: path=~{{ ansible_user_id }}/src state=directory
+  when: go_version|failed or go_version.stdout != go_version_target
+
+- name: Grab the source via mercurial
+  when: go_version|failed or go_version.stdout != go_version_target
+  hg: >
+    repo=https://code.google.com/p/go
+    dest=~{{ ansible_user_id }}/src/go
+    revision=release
+    purge=yes
+
+- name: Build the source
+  when: go_version|failed or go_version.stdout != go_version_target
+  shell: cd ~{{ ansible_user_id }}/src/go/src; bash -lc "./all.bash"
+
+- name: Add the Go bin script (sets up GOPATH, etc.) to .bash.d
+  copy: src=99_go.bash dest=~{{ ansible_user_id }}/.bash.d/ force=yes
+
+- include: go-get.yml

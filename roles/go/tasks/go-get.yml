@@ -19,12 +19,10 @@
 - name: go get binaries
   shell: cd; bash -lc "go get -u {{ item }}"
   with_items:
+    - "code.google.com/p/go.tools/cmd/..."
     - github.com/spf13/hugo
     - github.com/tools/godep
-    #- github.com/jingweno/gh
-    - github.com/tsuru/tsuru/cmd/tsuru
-    - github.com/tsuru/tsuru/cmd/tsuru-admin
-    - github.com/tsuru/tsuru/cmd/crane
     - github.com/dinedal/textql
     - github.com/tsenart/vegeta
     - github.com/rakyll/boom
+    - github.com/laher/goxc
