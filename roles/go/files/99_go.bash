@@ -1,4 +1,4 @@
-export PATH=:$PATH:/usr/local/go/bin/go
+export PATH=:$PATH:/usr/local/go/bin
 
 if hash go 2>/dev/null; then
     export GOPATH=$HOME/code/go

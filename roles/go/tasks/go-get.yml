@@ -1,0 +1,30 @@
+- name: Install bzr, hg, git, etc. for Debian
+  when: ansible_os_family == "Debian"
+  apt: pkg={{ item }} state=installed
+  sudo: yes
+  with_items:
+    - bzr
+    - mercurial
+    - git
+
+- name: Install bzr, hg, git, etc. for Mac OS
+  when: ansible_os_family == "Darwin"
+  homebrew: name={{ item }} state=present
+  with_items:
+    - bzr
+    - mercurial
+    - git
+
+#TODO setup a symlink from GOPATH whatever to ~/managed-bin
+- name: go get binaries
+  shell: cd; bash -lc "go get -u {{ item }}"
+  with_items:
+    - github.com/spf13/hugo
+    - github.com/tools/godep
+    #- github.com/jingweno/gh
+    - github.com/tsuru/tsuru/cmd/tsuru
+    - github.com/tsuru/tsuru/cmd/tsuru-admin
+    - github.com/tsuru/tsuru/cmd/crane
+    - github.com/dinedal/textql
+    - github.com/tsenart/vegeta
+    - github.com/rakyll/boom

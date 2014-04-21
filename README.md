@@ -23,7 +23,6 @@ TODO:
 - [ ] PHP (5.3, 5.4, 5.5, 5.6)
 - [ ] Clojure + Lein
 - [ ] Node (most recent should be fine)
-- [ ] Go binaries (vegeta, docker, tsuru, hugo, etc.)
 - [ ] Include fonts (Google, powerline, maybe others)
 - [ ] Include backup management of some sort (tarsnap?)
 - [ ] Virtualization role (VirtualBox, Vagrant, Packer, etc.)
@@ -37,6 +36,7 @@ TODO:
 - [ ] Cron jobs (like refreshing this repo every day)
 - [ ] Alternative terminal?
 - [x] Go (1.2 should be fine)
+- [x] Go binaries (vegeta, docker, tsuru, hugo, etc.)
 - [x] Playbook tags
 - [x] rbenv-rehash and other important plugins
 - [x] Include a way of pulling changes in on the same PC (pull mode?)

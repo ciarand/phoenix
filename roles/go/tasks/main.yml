@@ -1,6 +1,6 @@
 ---
 - name: Add the Go bin script (sets up GOPATH, etc.) to .bash.d
-  copy: src=99_go.bash dest=~{{ ansible_user_id }}/.bash.d/
+  copy: src=99_go.bash dest=~{{ ansible_user_id }}/.bash.d/ force=yes
 
 - name: Include the OS-specific vars file
   include_vars: "{{ ansible_os_family }}.yml"
@@ -24,3 +24,5 @@
   when: go_version|failed or go_version.stdout != go_version_target
   sudo: yes
   command: tar -C /usr/local -xf ~{{ ansible_user_id }}/tarballs/{{ go_tarball }}
+
+- include: "go-get.yml"
