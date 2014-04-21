@@ -9,6 +9,7 @@
     - { src: 'git/config', dest: '.gitconfig' }
     - { src: 'git/config.local', dest: '.gitconfig.local' }
     - { src: 'inputrc', dest: '.inputrc' }
+    - { src: 'tmux.conf', dest: '.tmux.conf' }
 
 - name: install .d dotfile dirs
   synchronize: src=dotfiles/{{ item.src }} dest=~/{{ item.dest }}

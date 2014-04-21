@@ -57,3 +57,6 @@ nnoremap k gk
 
 " Quick yanking to the end of the line
 nnoremap Y y$
+
+" F9 to dispatch (see: vim-dispatch)
+nnoremap <F9> :Dispatch<CR>

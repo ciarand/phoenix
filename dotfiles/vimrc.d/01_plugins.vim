@@ -21,7 +21,6 @@ Bundle "jordwalke/flatlandia"
 Bundle "jnurmine/Zenburn"
 
 " NERDtree and other file manipulation bundles
-" Bundle "scrooloose/nerdtree"
 Bundle "tpope/vim-vinegar"
 Bundle "kien/ctrlp.vim"
 
@@ -35,6 +34,7 @@ Bundle "evanmiller/nginx-vim-syntax"
 Bundle "vim-scripts/VimClojure"
 Bundle "kchmck/vim-coffee-script"
 Bundle "lepture/vim-jinja"
+Bundle "tpope/vim-commentary"
 
 " Go stuff
 Bundle "Blackrush/vim-gocode"
@@ -42,11 +42,15 @@ Bundle "Blackrush/vim-gocode"
 " Linters
 Bundle "scrooloose/syntastic"
 
-" tpope"s other stuff
+" tpope"s other stuff - should probably just download his profile
 Bundle "tpope/vim-unimpaired"
 Bundle "tpope/vim-endwise"
 Bundle "tpope/vim-surround"
 Bundle "tpope/vim-dispatch"
+Bundle "tpope/vim-eunuch"
+Bundle "tpope/vim-rsi"
+Bundle "tpope/vim-repeat"
+Bundle "tpope/vim-sleuth"
 
 " Git stuff
 Bundle "tpope/vim-fugitive"
