@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ag -Q --ignore vendor/ --ignore extensions/ \
+    --ignore *.scss --ignore *.css \
+    --ignore *.html --ignore *.js --ignore *.json \
+    "$@"

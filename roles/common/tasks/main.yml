@@ -2,9 +2,12 @@
 # Common tasks across nodes
 
 - name: Make sure APT is up to date
+  when: ansible_os_family == "Debian"
+  sudo: yes
   apt: update_cache=yes upgrade=yes
 
 - name: Install common packages
+  when: ansible_os_family == "Debian"
   apt : pkg={{ item }} state=installed
   sudo: yes
   with_items:
@@ -12,6 +15,20 @@
     - vim-gtk
     - git
     - bash
+    - bash-completion
+
+- name: Install common packages
+  when: ansible_os_family == "Darwin"
+  homebrew: name={{ item }} state=present
+  with_items:
+    - mosh
+    - git
+    - bash
+    - bash-completion
+
+- name: Install fully featured vim
+  when: ansible_os_family == "Darwin"
+  homebrew: name=vim state=present install_options=override-system-vi,with-client-server,with-lua,with-luajit,with-perl,with-python3,with-tlc
 
 - name: Remove .bashrc (we use .bash_profile)
   file: path=~{{ ansible_user_id }}/.bashrc state=absent

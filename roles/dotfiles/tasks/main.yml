@@ -1,0 +1,18 @@
+---
+# setup dotfiles
+
+- name: install dotfiles
+  template: src=dotfiles/{{ item.src }} dest=~{{ ansible_user_id }}/{{ item.dest }}
+  with_items:
+    - { src: 'vimrc', dest: '.vimrc' }
+    - { src: 'bash_profile', dest: '.bash_profile' }
+    - { src: 'git/config', dest: '.gitconfig' }
+    - { src: 'git/config.local', dest: '.gitconfig.local' }
+    - { src: 'inputrc', dest: '.inputrc' }
+
+- name: install .d dotfile dirs
+  synchronize: src=dotfiles/{{ item.src }} dest=~/{{ item.dest }}
+  with_items:
+    - { src: 'vimrc.d/', dest: '.vimrc.d' }
+    - { src: 'bash.d/', dest: '.bash.d' }
+    - { src: 'bin/', dest: 'bin' }

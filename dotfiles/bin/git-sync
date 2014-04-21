@@ -1,0 +1,2 @@
+#!/bin/bash
+git pull --ff-only && git push origin `git rev-parse --abbrev-ref HEAD`

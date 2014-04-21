@@ -1,7 +1,8 @@
 ---
 # ruby specific dependencies
 
-- name: Install build reqs for Ruby
+- name: Install build reqs for Ruby in Debian
+  when: ansible_os_family == "Debian"
   apt: pkg={{ item }} state=installed
   sudo: yes
   with_items:
@@ -30,20 +31,25 @@
     - zlib1g
     - zlib1g-dev
 
+- name: Install build reqs for Ruby in Mac OS X
+  when: ansible_os_family == "Darwin"
+  homebrew: name={{ item }} state=present
+  with_items:
+    - autoconf
+    - pkg-config
+    - openssl
+
 - name: Installs rbenv
   git: repo=git://github.com/sstephenson/rbenv.git dest=~{{ ansible_user_id }}/.rbenv
 
-- name: Ensure fragments bash dir exists
+- name: Ensure ~/bash.d exists
   file: dest=~{{ ansible_user_id }}/.bash.d/ state=directory
 
 - name: Installs rbenv bash file
   copy: src=50_rbenv.bash dest=~{{ ansible_user_id }}/.bash.d/50_rbenv.bash mode=700 owner={{ ansible_user_id }}
 
-- name: Source rbenv bash file in dot bashrc
-  lineinfile: dest=~{{ ansible_user_id }}/.bash_profile regexp="rbenv" insertafter=EOF line="source ~/.bash.d/50_rbenv.bash" create=yes
-
 - name: Creates plugin directory
-  file: path=~{{ ansible_user_id }}/.rbenv/plugins/ owner={{ ansible_user_id }} group={{ ansible_user_id }} mode=0755 state=directory
+  file: path=~{{ ansible_user_id }}/.rbenv/plugins/ owner={{ ansible_user_id }} mode=0755 state=directory
 
 - name: Installs ruby-build
   git: repo=git://github.com/sstephenson/ruby-build.git dest=~{{ ansible_user_id }}/.rbenv/plugins/ruby-build

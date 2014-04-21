@@ -1,0 +1,43 @@
+[include]
+    path = .gitconfig.local
+
+[user]
+    email = me@ciarand.me
+    name = Ciaran Downey
+
+[github]
+    user = ciarand
+
+[credential]
+    helper = cache
+
+[core]
+    autocrlf = input
+    whitespace = trailing-space,space-before-tab
+    excludesfiles = ~/.gitignore
+
+[alias]
+    ci = commit -v
+    pl = pull --ff-only
+    count = shortlog -sn
+    current-branch = rev-parse --abbrev-ref HEAD
+    root = rev-parse --show-toplevel
+    magic = !git stash -u && git stash pop
+    d = difftool
+    nws = !sh -c 'git diff -w --no-color "$@" | git apply --cached --ignore-whitespace' -
+    hash = rev-parse --short HEAD
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+
+[diff]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
+
+[push]
+    default = current

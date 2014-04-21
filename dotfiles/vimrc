@@ -1,0 +1,9 @@
+" source everything in vimrc.d
+for f in split(glob("~/.vimrc.d/*.vim"), "\n")
+    exe 'silent! source' f
+endfor
+
+"" Local config (for OS or host-specific stuff)
+if filereadable($HOME . "/.vimrc.local")
+    source ~/.vimrc.local
+endif

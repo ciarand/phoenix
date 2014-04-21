@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/local/Cellar/php55/5.5.9/bin/php "$@"

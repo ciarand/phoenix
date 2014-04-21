@@ -1,0 +1,6 @@
+#!/bin/bash
+git log --all --before={`date "+%Y-%m-%d"`}\
+    --after={`date -v-2w "+%Y-%m-%d"`}\
+    --author="`git config user.name`"\
+    --reverse --date=short\
+    --pretty=format:"(%cd) – %s%n%n%b---"
