@@ -1,0 +1,4 @@
+---
+go_tarball: "go1.2.1.darwin-amd64-osx10.8.tar.gz"
+go_tarball_checksum: "551c5543c75b1f8dc20743722db31c8fe0238d0a3d48412cfd7f664ce34f9f8c"
+go_version_target: "go version go1.2.1 darwin/amd64"
