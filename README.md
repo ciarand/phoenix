@@ -18,17 +18,14 @@ make install
 
 TODO:
 -----
-- [ ] Dotfiles
 - [ ] Contribute fixes back to ansible-rbenv-playbook
 - [ ] Include more core programs (Chromium, HipChat, Spotify, etc.)
 - [ ] Include more languages w/ version managers (nvm, gvm, php, clojure, etc.)
 - [ ] Include fonts (Google, powerline, maybe others)
 - [ ] Include backup management of some sort (tarsnap?)
-- [x] Include a way of pulling changes in on the same PC (pull mode?)
 - [ ] Virtualization role (VirtualBox, Vagrant, Packer, etc.)
 - [ ] Sanity checks on file permissions (.ssh, etc.)
 - [ ] Configuration files (sshd_config)
-- [x] Tags
 - [ ] More of the programs I use (ctags, sqlite, ant, irssi, and so on)
 - [ ] Integration with OpenBox
 - [ ] Refactor variables like ruby versions into group_vars
@@ -36,7 +33,10 @@ TODO:
 - [ ] Disk encryption
 - [ ] Cron jobs (like refreshing this repo every day)
 - [ ] Alternative terminal?
-- [ ] rbenv-rehash and other important plugins
+- [x] Playbook tags
+- [x] rbenv-rehash and other important plugins
+- [x] Include a way of pulling changes in on the same PC (pull mode?)
+- [x] Dotfiles
 
 Credits
 -------
