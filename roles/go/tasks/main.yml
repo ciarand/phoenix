@@ -6,9 +6,10 @@
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Register the current Go version (if any)
-  shell: go version
+  command: /usr/local/go/bin/go version
   ignore_errors: yes
   register: go_version
+  changed_when: false
 
 - name: Ensure there is a tarballs dir in ~
   file: path=~{{ ansible_user_id }}/tarballs state=directory

@@ -1,2 +1,3 @@
 ---
-go_download_location: "https://go.googlecode.com/files/{{ go_tarball }}"
+# we don't use https because we're checksumming the tarball anyway
+go_download_location: "http://go.googlecode.com/files/{{ go_tarball }}"
