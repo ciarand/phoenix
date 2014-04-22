@@ -50,7 +50,6 @@ Bundle "tpope/vim-dispatch"
 Bundle "tpope/vim-eunuch"
 Bundle "tpope/vim-rsi"
 Bundle "tpope/vim-repeat"
-Bundle "tpope/vim-sleuth"
 
 " Git stuff
 Bundle "tpope/vim-fugitive"
