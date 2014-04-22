@@ -6,9 +6,8 @@ Prerequisites
 -------------
 Works on Mac OS X and Debian. On a Debian machine it doesn't expect much outside
 of the base config and a working SSH connection. On a Mac it needs Homebrew
-([brew.sh][brew]) and maybe some other stuff like Xcode CLI tools.
-
-I'm not your mother.
+([brew.sh][brew]) and maybe some other stuff like Xcode CLI tools. I don't have
+a fresh installation to test with so you're kind of on your own for that one.
 
 [brew]: http://brew.sh
 
@@ -26,15 +25,29 @@ What does it do?
 
 - Sets up a working go environment (from source) and installs some basic bins
 
+- Replicates these scripts (repo included) to the target machine
+
 [dotfiles]: /dotfiles
 
 What I want it to do
 --------------------
 - Setup a working PHP environment with 5.3 through 5.6 available
+    - Include a "global" composer install
+    - Include xdebug and phpdbg where applicable
+    - Run composer install with my the composer.lock from dotfiles
 
 - Setup a working Clojure / ClojureScript environment
+    - lein
+    - working JVM I guess
+    - closure compiler and ant (needs jvm, unrelated to clojure)
 
 - Setup a working Node environment
+    - nvm
+    - probably add some tools here (grunt, gulp, jsuglify2++, etc.)
+
+- .NET environment
+    - maybe
+    - xamarin?
 
 - Setup a decent set of system-wide fonts (Google's, Powerline, etc.)
 
@@ -51,7 +64,11 @@ What I want it to do
 
 - Setup a working toolset for virtualization (packer, vagrant, VirtualBox)
 
+- Setup a Docker environment (on Debian at least)
+    - investigate whether we still need to muck with the kernel
+
 - Refactor roles into Ansible-galaxy roles
+    - a very low priority if we're being honest
 
 Credits
 -------
