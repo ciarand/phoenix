@@ -1,0 +1,4 @@
+---
+- name: install brew-cask
+  when: ansible_os_family == "Darwin"
+  homebrew_tap: name=phinze/cask state=present
