@@ -16,15 +16,17 @@
 
 - name: Install fully featured vim in Darwin
   when: ansible_os_family == "Darwin"
+  register: installed_vim
   homebrew: >
     name=vim
     state=present
     install_options=override-system-vi,with-lua,with-luajit,with-perl,with-python3,with-tlc
 
-- name: Grab Vundle
+- name: Grab Vundle from Github
   git: >
     repo=git://github.com/gmarik/vundle.git
     dest=~{{ ansible_user_id }}/.vim/bundle/vundle
 
-- name: Run PluginInstall
+- name: Run Vundle's PluginInstall to grab the latest
   shell: cd; bash -lc "vim +PluginInstall +qall"
+  when: installed_vim|changed
