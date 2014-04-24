@@ -19,7 +19,7 @@
   homebrew: >
     name=vim
     state=present
-    install_options=override-system-vi,with-client-server,with-lua,with-luajit,with-perl,with-python3,with-tlc
+    install_options=override-system-vi,with-lua,with-luajit,with-perl,with-python3,with-tlc
 
 - name: Grab Vundle
   git: >
