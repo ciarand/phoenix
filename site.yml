@@ -5,6 +5,8 @@
       changed_when: false
 
 - hosts: all
+  vars_files:
+    - vars/main.yml
   roles:
     - role: common
 
@@ -33,3 +35,9 @@
 
     - role: replication
       tags: ["config"]
+
+    - role: virtualization
+      tags: ["virtualization"]
+
+    - role: packaging
+      tags: ["packaging"]

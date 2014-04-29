@@ -1,3 +1,13 @@
 ---
 # we don't use https because we're checksumming the tarball anyway
 go_download_location: "http://go.googlecode.com/files/{{ go_tarball }}"
+
+go_binaries:
+  # blog
+  - {repo: github.com/spf13/hugo,      version: v0.10}
+  # go deps
+  - {repo: github.com/tools/godep,     version: HEAD}
+  - {repo: github.com/dinedal/textql,  version: HEAD}
+  - {repo: github.com/tsenart/vegeta,  version: HEAD}
+  - {repo: github.com/rakyll/boom,     version: HEAD}
+  - {repo: github.com/laher/goxc,      version: HEAD}

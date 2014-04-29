@@ -45,6 +45,20 @@
   shell: cd ~{{ ansible_user_id }}/src/go/src; bash -lc "./all.bash"
 
 - name: Add the Go bin script (sets up GOPATH, etc.) to .bash.d
-  copy: src=99_go.bash dest=~{{ ansible_user_id }}/.bash.d/ force=yes
+  template: >
+    src=99_go.bash
+    dest=~{{ ansible_user_id }}/.bash.d/
+    force=yes
+
+- name: make sure ~/managed-bin exists
+  file: >
+    path=~{{ ansible_user_id }}/managed-bin
+    state=directory
+
+- name: link the $GOPATH/bin/ dir to ~/managed-bin
+  file: >
+    src=~{{ ansible_user_id }}/managed-bin/
+    dest={{ gopath | expanduser }}/bin
+    state=link
 
 - include: go-get.yml

@@ -15,14 +15,19 @@
     - mercurial
     - git
 
-#TODO setup a symlink from GOPATH whatever to ~/managed-bin
-- name: go get binaries
-  shell: cd; bash -lc "go get {{ item }}"
+- name: git clone interesting things
+  register: go_git_clone_task
+  git: >
+    repo=git://{{ item.repo }}
+    dest={{ gopath | expanduser }}/src/{{ item.repo }}
+    version={{ item.version }}
   with_items:
-    - code.google.com/p/go.tools/cmd/...
-    - github.com/spf13/hugo
-    - github.com/tools/godep
-    - github.com/dinedal/textql
-    - github.com/tsenart/vegeta
-    - github.com/rakyll/boom
-    - github.com/laher/goxc
+    go_binaries
+
+- name: install any binaries that were changed
+  when: go_git_clone_task | changed
+  shell: >
+    cd {{ gopath | expanduser }}/src/{{ item.repo }};
+    bash -lc "go install"
+  with_items:
+    go_binaries
