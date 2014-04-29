@@ -13,6 +13,9 @@ autocmd BufNewFile,BufRead *.json set filetype=javascript
 "" Coffeescript (yuck)
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
+"" YAML (yuck)
+autocmd BufNewFile,BufReadPost *.yml,*.yaml setl shiftwidth=2 expandtab
+
 "" Commit messages (git)
 au BufNewFile,BufRead COMMIT_EDITMSG set spell
 

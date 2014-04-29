@@ -18,7 +18,7 @@ set undolevels
 " Similar muchos for history
 set history
 " Set the backspace button free
-set backspace
+set backspace=indent,eol,start
 " change the terminal's title
 set title
 " don't beep

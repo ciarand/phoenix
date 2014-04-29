@@ -1,8 +1,8 @@
 "" Color scheme settings
 " colorscheme flatlandia
-colorscheme zenburn
+colorscheme default
 " set background=light
-set background=dark
+" set background=dark
 
 let g:airline_powerline_fonts = 1
 

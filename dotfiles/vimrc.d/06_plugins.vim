@@ -14,6 +14,16 @@ let g:vdebug_options = {}
 "" Netrw (not technically a plugin I guess)
 " This stops it from doing that stupid cursorline thing
 let g:netrw_cursor = 0
+" preview vertically
+let g:netrw_preview = 1
+" maintain the last file
+let b:netrw_lastfile = 1
+" don't use an errorwindow (just echo it)
+let g:netrw_use_errorwindow = 0
+" tree liststyle
+let g:netrw_liststyle = 3
+" preview windows use 50 cols
+let g:netrw_winsize = 50
 
 "" Tagbar
 map <C-k><C-v> :TagbarToggle<CR>
