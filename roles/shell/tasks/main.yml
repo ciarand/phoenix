@@ -2,12 +2,12 @@
 - name: install bash_profile
   template: >
     src=dotfiles/bash_profile
-    dest=~{{ ansible_user_id }}/.bash_profile
+    dest={{ home }}/.bash_profile
 
 - name: install .bash.d dir
   synchronize: >
     src=dotfiles/bash.d/
-    dest=~{{ ansible_user_id }}/.bash.d
+    dest={{ home }}/.bash.d
 
 - name: make sure a .marks path exists
   file: path=~{{ ansible_user_id }}/.marks state=directory

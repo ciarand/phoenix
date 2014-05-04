@@ -2,14 +2,19 @@
 # setup dotfiles
 
 - name: install dotfiles
-  template: src=dotfiles/{{ item.src }} dest=~{{ ansible_user_id }}/{{ item.dest }}
+  template: >
+    src=dotfiles/{{ item.src }}
+    dest={{ home }}/{{ item.dest }}
   with_items:
     - { src: 'git/config', dest: '.gitconfig' }
     - { src: 'git/config.local', dest: '.gitconfig.local' }
+    - { src: 'git/gitignore', dest: '.gitignore' }
     - { src: 'inputrc', dest: '.inputrc' }
     - { src: 'tmux.conf', dest: '.tmux.conf' }
 
 - name: install .d dotfile dirs
-  synchronize: src=dotfiles/{{ item.src }} dest=~/{{ item.dest }}
+  synchronize: >
+    src=dotfiles/{{ item.src }}
+    dest={{ home }}/{{ item.dest }}
   with_items:
     - { src: 'bin/', dest: 'bin' }
