@@ -23,6 +23,7 @@ Bundle "jnurmine/Zenburn"
 " NERDtree and other file manipulation bundles
 Bundle "tpope/vim-vinegar"
 Bundle "kien/ctrlp.vim"
+Bundle "rking/ag.vim"
 
 " Syntax stuff
 Bundle "tpope/vim-markdown"
