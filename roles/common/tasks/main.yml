@@ -26,10 +26,6 @@
     - bash
     - bash-completion
 
-- name: Install fully featured vim
-  when: ansible_os_family == "Darwin"
-  homebrew: name=vim state=present install_options=override-system-vi,with-client-server,with-lua,with-luajit,with-perl,with-python3,with-tlc
-
 - name: Remove .bashrc (we use .bash_profile)
   file: path=~{{ ansible_user_id }}/.bashrc state=absent
 

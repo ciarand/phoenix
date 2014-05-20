@@ -85,9 +85,9 @@ set undofile
 set undodir=~/.vim/undodir
 
 "" Tab completion settings
-set wildmode=list:longest,list:full
-set complete=.,w,t
-set omnifunc=syntaxcomplete#Complete
+" set wildmode=list:longest,list:full
+" set complete=.,w,t
+" set omnifunc=syntaxcomplete#Complete
 
 "" Invisible chars and such
 set list

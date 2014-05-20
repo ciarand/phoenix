@@ -1,0 +1,16 @@
+- name: Make sure username exists as a real user w/ groups
+  sudo: yes
+  sudo_user: root
+  user: >
+      name={{ username }}
+      state=present
+      groups=sudo,wheel
+      append=yes
+
+- name: Insure we're in the sudoers file
+  sudo: yes
+  sudo_user: root
+  lineinfile: >
+    dest=/etc/sudoers
+    state=present
+    line="{{ username }} ALL=(ALL:ALL) ALL"

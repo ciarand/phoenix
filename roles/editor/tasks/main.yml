@@ -18,14 +18,14 @@
   when: ansible_os_family == "Darwin"
   register: installed_vim
   homebrew: >
-    name=vim
+    name=macvim
     state=present
-    install_options=override-system-vi,with-lua,with-luajit,with-perl,with-python3,with-tlc
+    install_options=override-system-vi,with-lua,with-luajit,with-python3
 
 - name: Grab Vundle from Github
   git: >
-    repo=git://github.com/gmarik/vundle.git
-    dest=~{{ ansible_user_id }}/.vim/bundle/vundle
+    repo=git://github.com/gmarik/Vundle.vim.git
+    dest=~{{ ansible_user_id }}/.vim/bundle/Vundle.vim
 
 - name: Run Vundle's PluginInstall to grab the latest
   shell: cd; bash -lc "vim +PluginInstall +qall"

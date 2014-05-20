@@ -1,72 +1,78 @@
+set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " Let Vundle manage Vundle
-Bundle "gmarik/vundle"
+Plugin 'gmarik/Vundle.vim'
 
-" Window management
-Bundle "christoomey/vim-tmux-navigator"
+" Tmux
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'jgdavey/tslime.vim'
 
 " powerline
-Bundle "bling/vim-airline"
+Plugin 'bling/vim-airline'
 
 " Project-specific settings
-Bundle "thinca/vim-localrc"
-Bundle "editorconfig/editorconfig-vim"
+Plugin 'thinca/vim-localrc'
+Plugin 'editorconfig/editorconfig-vim'
 
 " Color schemes
-Bundle "chriskempson/base16-vim"
-Bundle "jordwalke/flatlandia"
-Bundle "jnurmine/Zenburn"
+Plugin 'chriskempson/base16-vim'
+Plugin 'jordwalke/flatlandia'
+Plugin 'jnurmine/Zenburn'
 
 " NERDtree and other file manipulation bundles
-Bundle "tpope/vim-vinegar"
-Bundle "kien/ctrlp.vim"
-Bundle "rking/ag.vim"
+Plugin 'tpope/vim-vinegar'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rking/ag.vim'
 
 " Syntax stuff
-Bundle "tpope/vim-markdown"
-Bundle "mukiwu/vim-twig"
-Bundle "xsbeats/vim-blade"
-Bundle "jnwhiteh/vim-golang"
-Bundle "ervandew/supertab"
-Bundle "evanmiller/nginx-vim-syntax"
-Bundle "vim-scripts/VimClojure"
-Bundle "kchmck/vim-coffee-script"
-Bundle "lepture/vim-jinja"
-Bundle "tpope/vim-commentary"
+Plugin 'tpope/vim-markdown'
+Plugin 'xsbeats/vim-blade'
+Plugin 'ervandew/supertab'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'lepture/vim-jinja'
+Plugin 'tpope/vim-commentary'
+" Note: I'd love to use this, but it breaks Go autocompletion hard
+" Plugin 'sheerun/vim-polyglot'
 
 " Go stuff
-Bundle "Blackrush/vim-gocode"
+" Plugin 'Blackrush/vim-gocode'
+Plugin 'fatih/vim-go'
+
+" ycm
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neosnippet.vim'
 
 " Linters
-Bundle "scrooloose/syntastic"
+Plugin 'scrooloose/syntastic'
 
-" tpope"s other stuff - should probably just download his profile
-Bundle "tpope/vim-unimpaired"
-Bundle "tpope/vim-endwise"
-Bundle "tpope/vim-surround"
-Bundle "tpope/vim-dispatch"
-Bundle "tpope/vim-eunuch"
-Bundle "tpope/vim-rsi"
-Bundle "tpope/vim-repeat"
+" tpope's other stuff - should probably just download his profile
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-rsi'
+Plugin 'tpope/vim-repeat'
 
 " Git stuff
-Bundle "tpope/vim-fugitive"
-Bundle "airblade/vim-gitgutter"
-
-" PHP stuff
-Bundle "vim-scripts/php.vim"
-Bundle "joonty/vim-phpunitqf"
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 " Quickfix toggle
-Bundle "Valloric/ListToggle"
+Plugin 'Valloric/ListToggle'
 
-" Tagbar
-Bundle "majutsushi/tagbar"
+" Tags
+Plugin 'taglist.vim'
+Plugin 'majutsushi/tagbar'
 
 " Alignment stuff
-Bundle "godlygeek/tabular"
+Plugin 'godlygeek/tabular'
 
-filetype on
+call vundle#end()
+
+filetype plugin indent on

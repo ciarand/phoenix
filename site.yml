@@ -30,3 +30,6 @@
 
     - role: packaging
       tags: ["packaging"]
+
+    - role: php
+      tags: ["php"]

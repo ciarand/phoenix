@@ -12,4 +12,16 @@
 - name: make sure a .marks path exists
   file: path=~{{ ansible_user_id }}/.marks state=directory
 
+- name: install git via homebrew on Darwin
+  when: ansible_os_family == "Darwin"
+  homebrew: >
+    name=git
+    state=present
 
+- name: install git completion on Darwin
+  when: ansible_os_family == "Darwin"
+  copy: >
+    src=99_homebrew_git_completion.bash
+    dest={{ home }}/.bash.d/99_homebrew_git_completion.bash
+    mode=700 owner={{ ansible_user_id }}
+    force=yes

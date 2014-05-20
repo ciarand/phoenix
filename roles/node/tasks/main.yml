@@ -1,0 +1,4 @@
+---
+# install prereqs for building node (libssl-dev, build-essential)
+# install nvm into ~/.nvm
+# 

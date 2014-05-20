@@ -11,6 +11,8 @@ let g:syntastic_php_phpcs_args = "--standard=PSR2"
 
 let g:vdebug_options = {}
 
+let g:neocomplete#enable_at_startup = 1
+
 "" Netrw (not technically a plugin I guess)
 " This stops it from doing that stupid cursorline thing
 let g:netrw_cursor = 0
