@@ -1,0 +1,14 @@
+- name: Install docker in Debian
+  when: ansible_os_family == "Debian"
+  apt: pkg={{ item }} state=installed
+  sudo: yes
+  with_items:
+    - lxc
+    - wget
+    - bsdtar
+    - iptables
+    - curl
+    - git
+    - aufs-tools
+    - libdevmapper-dev
+

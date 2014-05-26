@@ -1,0 +1,4 @@
+- hosts: desktop
+  roles:
+    - role: bootstrap
+      sudo: yes

@@ -17,11 +17,11 @@
 - name: git clone gox (a packer dependency)
   git: >
     repo=git://github.com/mitchellh/gox
-    dest={{ gopath | expanduser }}/src/github.com/mitchellh/gox
+    dest={{ gopath }}/src/github.com/mitchellh/gox
     version=v0.3.0
 
 - name: install gox (a packer dependency)
-  shell: cd {{ gopath }}/src/github.com/mitchellh/gox; go install
+  shell: bash -lc "cd {{ gopath }}/src/github.com/mitchellh/gox && go get ./... && go install"
 
 - name: clone packer
   git: >
@@ -30,4 +30,4 @@
       version=5cd2cfa5638fd90a01de1fe94f0a2b9eb16f8ba2
 
 - name: install packer via make
-  shell: cd {{ gopath }}/src/github.com/mitchellh/packer; make
+  shell: bash -lc "cd {{ gopath }}/src/github.com/mitchellh/packer && make"

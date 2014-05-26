@@ -1,0 +1,11 @@
+vim_options: >
+  --enable-fail-if-missing
+  --enable-luainterp
+  --with-luajit
+  --enable-perlinterp
+  --enable-pythoninterp
+  --enable-python3interp
+  --enable-rubyinterp
+  --enable-tclinterp
+  --enable-multibyte
+  --enable-fontset

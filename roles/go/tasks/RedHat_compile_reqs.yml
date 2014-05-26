@@ -1,0 +1,10 @@
+- name: install the prereqs for compiling the Go source on RedHat
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - gcc
+    - glibc-devel.i686
+    - glibc-devel.x86_64
+    - mercurial
+    - bzr
+    - git

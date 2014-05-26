@@ -1,0 +1,7 @@
+- name: install the prereqs for compiling the Go source on Darwin
+  homebrew: name={{ item }} state=present
+  with_items:
+    - mercurial
+    - bzr
+    - git
+

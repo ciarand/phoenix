@@ -1,0 +1,4 @@
+- name: install extra deps
+  homebrew: name={{ item }} state=present
+  with_items:
+    - luajit

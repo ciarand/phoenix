@@ -1,0 +1,7 @@
+- name: Install build reqs for Ruby in Mac OS X
+  when: ansible_os_family == "Darwin"
+  homebrew: name={{ item }} state=present
+  with_items:
+    - autoconf
+    - pkg-config
+    - openssl

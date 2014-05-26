@@ -1,0 +1,35 @@
+- name: make sure there's a wheel group
+  group: name=wheel state=present
+
+- name: make sure there's a user account
+  user: >
+    name=ciarand
+    state=present
+    groups=wheel
+    append=yes
+    shell=/bin/bash
+
+- name: make sure the wheel group is in the sudoers file
+  lineinfile: >
+    dest=/etc/sudoers
+    state=present
+    regexp='^%WHEEL ALL\='
+    line='%WHEEL ALL=(ALL) NOPASSWD:ALL'
+    validate='visudo -cf %s'
+
+- name: make sure user account has our public ssh key
+  authorized_key: >
+    user=ciarand
+    key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: Disallow unsafe SSH practices
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp="{{ item.regexp }}"
+    line="{{ item.line }}"
+    state=present
+  notify: restart sshd
+  with_items:
+    - { regexp: "^PermitRootLogin", line: "PermitRootLogin no" }
+    - { regexp: "^PasswordAuthentication", line: "PasswordAuthentication no" }
+    - { regexp: "^GSSAPIAuthentication", line: "GSSAPIAuthentication no" }

@@ -1,4 +1,4 @@
-export GOPATH={{ gopath | expanduser }}
+export GOPATH=$HOME/code/go
 export PATH=$HOME/src/go/bin:$GOPATH/bin:$PATH
 
 if hash go 2>/dev/null; then

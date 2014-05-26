@@ -1,0 +1,24 @@
+# Here's where we were going to setup a local mirror for yum, but it looks like
+# it's kind of a huge pita to do b/c it involves setting up apache and stuff.
+#
+# TODO: look into maybe using docker or something
+#- name: get yum-utils
+#sudo: yes
+#yum: name=yum-utils state=latest
+
+- name: update errything
+  sudo: yes
+  yum: name="*" state=latest
+
+- name: Install common packages on Fedora
+  sudo: yes
+  # latest is safe b/c fedora is conservative (i.e. old)
+  yum: name={{ item }} state=latest
+  with_items:
+    - mosh
+    # need to upgrade vim-minimal before you're allowed to install vim-enhanced
+    - the_silver_searcher
+    - git
+    - bash
+    - bash-completion
+

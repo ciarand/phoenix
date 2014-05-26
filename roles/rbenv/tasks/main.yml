@@ -1,43 +1,13 @@
 ---
-# ruby specific dependencies
-
-- name: Install build reqs for Ruby in Debian
-  when: ansible_os_family == "Debian"
-  apt: pkg={{ item }} state=installed
-  sudo: yes
-  with_items:
-    - autoconf
-    - automake
-    - bison
-    - build-essential
-    - curl
-    - exuberant-ctags
-    - git-core
-    - libreadline6
-    - libreadline6-dev
-    - libreadline-dev
-    - libsqlite3-0
-    - libsqlite3-dev
-    - libssl-dev
-    - libyaml-dev
-    - libc6-dev
-    - libncurses5-dev
-    - libtool
-    - libxml2-dev
-    - libxslt1-dev
-    - openssl
-    - sqlite3
-    - subversion
-    - zlib1g
-    - zlib1g-dev
-
-- name: Install build reqs for Ruby in Mac OS X
+# ruby compilation requirements (OS specific)
+- include: "Darwin_reqs.yml"
   when: ansible_os_family == "Darwin"
-  homebrew: name={{ item }} state=present
-  with_items:
-    - autoconf
-    - pkg-config
-    - openssl
+
+- include: "RedHat_reqs.yml"
+  when: ansible_os_family == "RedHat"
+
+- include: "Debian_reqs.yml"
+  when: ansible_os_family == "Debian"
 
 - name: Installs rbenv
   git: repo=git://github.com/sstephenson/rbenv.git dest=~{{ ansible_user_id }}/.rbenv

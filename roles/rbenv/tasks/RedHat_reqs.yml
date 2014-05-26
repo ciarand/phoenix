@@ -1,0 +1,13 @@
+- name: Install build reqs for Ruby in RedHat
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - gcc-c++
+    - glibc-headers
+    - openssl-devel
+    - readline
+    - libyaml-devel
+    - readline-devel
+    - zlib
+    - zlib-devel
+    - svn

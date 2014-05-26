@@ -1,0 +1,48 @@
+- name: remove the old version of vim
+  sudo: yes
+  yum: name=vim state=absent
+
+- name: install extra deps
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - luajit
+    - lua-devel
+    - luajit-devel
+    - ctags
+    - mercurial
+    - python
+    - python-devel
+    - python3
+    - python3-devel
+    - perl
+    - perl-ExtUtils-ParseXS
+    - perl-ExtUtils-XSpp
+    - perl-ExtUtils-CBuilder
+    - tcl-devel
+
+- name: symlink xsubpp from /usr/bin to the perl dir
+  sudo: yes
+  file: >
+    src=/usr/bin/xsubpp
+    dest=/usr/share/perl5/ExtUtils/xsubpp
+    state=link
+
+- name: make sure we have ~/src/ as a real dir
+  file: path=~/src state=directory
+
+- name: clone the vim source (because we're compiling from scratch)
+  hg: >
+    repo=https://vim.googlecode.com/hg/
+    dest=~/src/vim
+    revision=v7-4-307
+
+- name: import vim installation variables
+  include_vars: "main.yml"
+
+- name: configure and compile the vim source
+  shell: cd ~/src/vim; bash -lc "./configure {{ vim_options }}"
+
+- name: install the just-compiled vim bins
+  sudo: yes
+  shell: cd ~{{ ansible_user_id }}/src/vim && VIMRUNTIMEDIR=/usr/share/vim/vim74 make install

@@ -1,0 +1,14 @@
+- name: Make sure APT is up to date
+  sudo: yes
+  apt: update_cache=yes upgrade=yes
+
+- name: Install common packages on Debian
+  sudo: yes
+  apt : pkg={{ item }} state=installed
+  with_items:
+    - mosh
+    - vim-gtk
+    - git
+    - bash
+    - bash-completion
+

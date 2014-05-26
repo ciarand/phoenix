@@ -1,0 +1,15 @@
+- name: Make sure we have a ~/src folder
+  file: path=~{{ ansible_user_id }}/src state=directory
+  when: should_recompile_go
+
+- name: Grab the source via mercurial
+  when: should_recompile_go
+  hg: >
+    repo=https://code.google.com/p/go
+    dest=~{{ ansible_user_id }}/src/go
+    revision={{ go_version_target }}
+
+- name: Build the source
+  when: should_recompile_go
+  shell: cd ~{{ ansible_user_id }}/src/go/src; bash -lc "./all.bash"
+

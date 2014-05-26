@@ -4,13 +4,16 @@
     src=dotfiles/bash_profile
     dest={{ home }}/.bash_profile
 
+- name: make sure .bash.d dir exists on target
+  file: path={{ home }}/.bash.d state=directory
+
 - name: install .bash.d dir
   synchronize: >
-    src=dotfiles/bash.d/
+    src="dotfiles/bash.d/"
     dest={{ home }}/.bash.d
 
-- name: make sure a .marks path exists
-  file: path=~{{ ansible_user_id }}/.marks state=directory
+- name: make sure .marks dir exists on target
+  file: path={{ home }}/.marks state=directory
 
 - name: install git via homebrew on Darwin
   when: ansible_os_family == "Darwin"

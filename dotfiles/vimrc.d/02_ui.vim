@@ -5,6 +5,10 @@ colorscheme default
 " set background=dark
 
 let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let ttimeoutlen = 50
+set laststatus=2
+" let g:bufferline_echo = 0
 
 "" Spell checker colors
 highlight clear SpellBad

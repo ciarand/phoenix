@@ -1,25 +1,8 @@
-- name: Install bzr, hg, git, etc. for Debian
-  when: ansible_os_family == "Debian"
-  apt: pkg={{ item }} state=installed
-  sudo: yes
-  with_items:
-    - bzr
-    - mercurial
-    - git
-
-- name: Install bzr, hg, git, etc. for Mac OS
-  when: ansible_os_family == "Darwin"
-  homebrew: name={{ item }} state=present
-  with_items:
-    - bzr
-    - mercurial
-    - git
-
 - name: git clone interesting things
   register: go_git_clone_task
   git: >
     repo=git://{{ item.repo }}
-    dest={{ gopath | expanduser }}/src/{{ item.repo }}
+    dest={{ gopath }}/src/{{ item.repo }}
     version={{ item.version }}
   with_items:
     go_binaries
@@ -27,7 +10,7 @@
 - name: install any binaries that were changed
   when: go_git_clone_task | changed
   shell: >
-    cd {{ gopath | expanduser }}/src/{{ item.repo }};
+    cd {{ gopath }}/src/{{ item.repo }};
     bash -lc "go install"
   with_items:
     go_binaries

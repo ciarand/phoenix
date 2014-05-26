@@ -10,6 +10,7 @@ Plugin 'gmarik/Vundle.vim'
 " Tmux
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jgdavey/tslime.vim'
+Plugin 'edkolev/tmuxline.vim'
 
 " powerline
 Plugin 'bling/vim-airline'
@@ -35,6 +36,7 @@ Plugin 'ervandew/supertab'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'lepture/vim-jinja'
 Plugin 'tpope/vim-commentary'
+Plugin 'derekwyatt/vim-scala'
 " Note: I'd love to use this, but it breaks Go autocompletion hard
 " Plugin 'sheerun/vim-polyglot'
 

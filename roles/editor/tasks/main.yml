@@ -1,4 +1,13 @@
 # install vim dotfiles
+- include: "Darwin_extras.yml"
+  when: ansible_os_family == "Darwin"
+
+- include: "RedHat_extras.yml"
+  when: ansible_os_family == "RedHat"
+
+- include: "Debian_extras.yml"
+  when: ansible_os_family == "Debian"
+
 - name: install vimrc
   template: src=dotfiles/{{ item.src }} dest=~{{ ansible_user_id }}/{{ item.dest }}
   with_items:
@@ -8,19 +17,6 @@
   synchronize: src=dotfiles/{{ item.src }} dest=~/{{ item.dest }}
   with_items:
     - { src: 'vimrc.d/', dest: '.vimrc.d' }
-
-- name: Install fully featured vim in Debian
-  when: ansible_os_family == "Debian"
-  apt : pkg=vim-gtk state=installed
-  sudo: yes
-
-- name: Install fully featured vim in Darwin
-  when: ansible_os_family == "Darwin"
-  register: installed_vim
-  homebrew: >
-    name=macvim
-    state=present
-    install_options=override-system-vi,with-lua,with-luajit,with-python3
 
 - name: Grab Vundle from Github
   git: >

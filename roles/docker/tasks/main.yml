@@ -1,17 +1,13 @@
 ---
-- name: Install docker in Debian
+# macosx docker is harder to setup tbh, so I haven't automated it yet
+#- include: "Darwin_reqs.yml"
+#when: ansible_os_family == "Darwin"
+
+- include: "RedHat_reqs.yml"
+  when: ansible_os_family == "RedHat"
+
+- include: "Debian_reqs.yml"
   when: ansible_os_family == "Debian"
-  apt: pkg={{ item }} state=installed
-  sudo: yes
-  with_items:
-    - lxc
-    - wget
-    - bsdtar
-    - iptables
-    - curl
-    - git
-    - aufs-tools
-    - libdevmapper-dev
 
 - name: Go get docker
   shell: cd; bash -lc "go get -v github.com/dotcloud/docker"
