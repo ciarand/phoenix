@@ -78,7 +78,11 @@ The `ruby`, `rbenv`, and `ruby-multi` playbooks were originally taken almost
 word-for-word from [ansible-rbenv-playbook][1]. They've been modified a little,
 but not much.
 
+The `scala` playbook was stolen from [AnsibleShipyard/ansible-scala][2] and
+modified to use more core Ansible modules instead of shell-ing out so much.
+
 [1]: https://github.com/leucos/ansible-rbenv-playbook
+[2]: https://github.com/AnsibleShipyard/ansible-scala
 
 License
 -------
