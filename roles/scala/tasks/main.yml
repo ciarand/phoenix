@@ -1,0 +1,33 @@
+- name: Create scala lib dir
+  file: path={{ scala_lib_path }} state=directory
+
+- name: Create directory for Scala {{ scala_version_name }}
+  file: path={{ scala_lib_path_target }} state=directory
+  register: create_scala_dir
+
+- name: Download scala v{{ scala_version}}
+  when: create_scala_dir|changed
+  get_url: >
+    url={{ scala_download_url}}
+    dest=/tmp/{{ scala_archive_file }}
+    force=no
+
+- name: Unpack Scala into the target path
+  unarchive: >
+    src=/tmp/{{ scala_archive_file }}
+    dest={{ scala_lib_path }}
+
+- name: link the binaries
+  file: >
+    src={{ scala_lib_path_target }}/bin/{{ item }}
+    dest={{ scala_link_target }}/{{ item }}
+    state=link
+    force=yes
+  with_items:
+    - scala
+    - scalac
+    - fsc
+    - sbaz
+    - sbaz-setup
+    - scaladoc
+    - scalap
