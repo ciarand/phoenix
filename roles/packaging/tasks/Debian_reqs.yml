@@ -1,0 +1,33 @@
+- name: add some extra ppas n stuff
+  sudo: yes
+  apt_repository: repo="{{ item }}" state=present
+  with_items:
+    - deb http://repository.spotify.com stable non-free
+  register: add_apt_repos
+
+- name: add apt keys n stuff
+  sudo: yes
+  apt_key: >
+    keyserver=keyserver.ubuntu.com
+    state=present
+    id=94558F59
+    state=present
+  register: add_apt_keys
+
+- name: force a refresh of the cache
+  when: add_apt_keys|changed or add_apt_repos|changed
+  sudo: yes
+  apt: update_cache=yes
+
+- name: install important apps n stuff
+  sudo: yes
+  apt: pkg={{ item }}
+  with_items:
+    - spotify-client
+    - gnome-tweak-tool
+    - chromium-browser
+    - chromium-codecs-ffmpeg-extra
+    - paprefs
+    - pulseaudio
+    - pulseaudio-module-raop
+    - inotify-tools

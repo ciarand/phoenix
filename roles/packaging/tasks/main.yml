@@ -1,4 +1,9 @@
 ---
-- name: install brew-cask
-  when: ansible_os_family == "Darwin"
-  homebrew_tap: name=phinze/cask state=present
+- include: "Darwin_reqs.yml"
+  when: os_family == "Darwin"
+
+- include: "RedHat_reqs.yml"
+  when: os_family == "RedHat"
+
+- include: "Debian_reqs.yml"
+  when: os_family == "Debian"

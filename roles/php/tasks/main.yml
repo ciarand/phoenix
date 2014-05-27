@@ -1,20 +1,8 @@
-- name: install composer
-  shell: bash -lc "cd; curl -sS https://getcomposer.org/installer | php"
+- include: "Darwin_reqs.yml"
+  when: os_family == "Darwin"
 
-- name: make sure ~/bin exists
-  file: >
-    path={{ home }}/bin
-    state=directory
+- include: "RedHat_reqs.yml"
+  when: os_family == "RedHat"
 
-#- name: move composer.phar into bin I guess. fuck it.
-
-- name: create the composer directory if it doesn't exist
-  file: >
-    path=~{{ ansible_user_id }}/.composer/vendor
-    state=directory
-
-- name: link ~/.composer/vendor/bin to managed-bin
-  file: >
-    src=~{{ ansible_user_id }}/managed-bin
-    dest=~{{ ansible_user_id }}/.composer/vendor/bin
-    state=link
+- include: "Debian_reqs.yml"
+  when: os_family == "Debian"

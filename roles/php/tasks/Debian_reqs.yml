@@ -1,0 +1,62 @@
+- name: install php5 deps (ansible apt module doesn't support build-dep)
+  sudo: yes
+  shell: apt-get build-dep -y php5
+
+- name: install php53, dev-deps from apt
+  sudo: yes
+  apt: pkg={{ item }} state=present
+  with_items:
+    - php5
+    - php5-dev
+    - php-pear
+    - autoconf
+    - automake
+    - curl
+    - build-essential
+    - libxslt1-dev
+    - re2c
+    - libxml2
+    - libxml2-dev
+    - php5-cli
+    - bison
+    - libbz2-dev
+    - libreadline-dev
+    - libssl-dev
+    - openssl
+    - gettext
+    - libfreetype6
+    - libfreetype6-dev
+    - libpng12-0
+    - libpng12-dev
+    - libjpeg-dev
+    - libjpeg8-dev
+    - libjpeg8
+    - libgd2-xpm-dev
+    - libxpm4
+    - gettext
+    - libgettextpo-dev
+    - libgettextpo0
+    - libicu48
+    - libicu-dev
+    - libmhash-dev
+    - libmhash2
+    - libmcrypt-dev
+    - libmcrypt4
+    - postgresql
+    - postgresql-client
+    - postgresql-contrib
+    - mysql-server
+    - mysql-client
+    - libmysqlclient-dev
+    - libmysqld-dev
+
+- name: grab phpbrew from the internet
+  get_url: >
+    url=https://raw.github.com/c9s/phpbrew/master/phpbrew
+    dest=~/managed-bin/phpbrew
+    mode=755
+  register: get_phpbrew
+
+- name: init phpbrew
+  when: get_phpbrew|changed
+  shell: cd; bash -lc "phpbrew init"

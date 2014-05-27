@@ -1,0 +1,2 @@
+- name: install brew-cask
+  homebrew_tap: name=phinze/cask state=present
