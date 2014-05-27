@@ -34,3 +34,9 @@
 
     - role: php
       tags: ["php"]
+
+    - role: scala
+      tags: ["scala"]
+
+    - role: clojure
+      tags: ["clojure"]
