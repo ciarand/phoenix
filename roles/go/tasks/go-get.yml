@@ -11,6 +11,6 @@
   when: go_git_clone_task | changed
   shell: >
     cd {{ gopath }}/src/{{ item.repo }};
-    bash -lc "go install"
+    bash -lc "go get ./... && go install"
   with_items:
     go_binaries
