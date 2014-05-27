@@ -1,0 +1,29 @@
+- include: "Darwin_reqs.yml"
+  when: os_family == "Darwin"
+
+- include: "RedHat_reqs.yml"
+  when: os_family == "RedHat"
+
+- include: "Debian_reqs.yml"
+  when: os_family == "Debian"
+
+- name: install lein into the src folder
+  register: clone_leiningen
+  # it's kind of funny, but we can't set the dest to leiningen otherwise the
+  # shell script they're using gets confused and complains about bootstrapping
+  git: >
+    repo=https://github.com/technomancy/leiningen.git
+    dest=~/src/lein
+    version=2.3.4
+
+- name: copy the bin script in
+  register: copy_leiningen
+  copy: >
+    src=~/src/lein/bin/lein
+    dest=~/managed-bin/lein
+    mode=755
+    owner={{ ansible_user_id }}
+
+- name: run the lein bootstrap script
+  when: copy_leiningen|changed or clone_leiningen|changed
+  shell: cd && lein

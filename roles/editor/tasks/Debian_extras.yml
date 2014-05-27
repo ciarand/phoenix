@@ -14,9 +14,6 @@
     - libextutils-xspp-perl
     - tcl-dev
 
-- name: make sure we have ~/src/ as a real dir
-  file: path=~/src state=directory
-
 - name: clone the source for luajit
   git: >
     repo=http://luajit.org/git/luajit-2.0.git

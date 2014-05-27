@@ -1,4 +1,14 @@
 ---
+- name: Remove .bashrc (we use .bash_profile)
+  file: path=~{{ ansible_user_id }}/.bashrc state=absent
+
+- name: make sure we have some important directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "~/managed-bin"
+    - "~/src"
+    - "~/code"
+
 - include: "Darwin_reqs.yml"
   when: os_family == "Darwin"
 
@@ -7,7 +17,4 @@
 
 - include: "Debian_reqs.yml"
   when: os_family == "Debian"
-
-- name: Remove .bashrc (we use .bash_profile)
-  file: path=~{{ ansible_user_id }}/.bashrc state=absent
 
