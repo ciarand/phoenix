@@ -1,13 +1,13 @@
 ---
 # macosx docker is harder to setup tbh, so I haven't automated it yet
 #- include: "Darwin_reqs.yml"
-#when: ansible_os_family == "Darwin"
+#when: os_family == "Darwin"
 
 - include: "RedHat_reqs.yml"
-  when: ansible_os_family == "RedHat"
+  when: os_family == "RedHat"
 
 - include: "Debian_reqs.yml"
-  when: ansible_os_family == "Debian"
+  when: os_family == "Debian"
 
 - name: Go get docker
   shell: cd; bash -lc "go get -v github.com/dotcloud/docker"

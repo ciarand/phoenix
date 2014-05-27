@@ -1,13 +1,13 @@
 ---
 # ruby compilation requirements (OS specific)
 - include: "Darwin_reqs.yml"
-  when: ansible_os_family == "Darwin"
+  when: os_family == "Darwin"
 
 - include: "RedHat_reqs.yml"
-  when: ansible_os_family == "RedHat"
+  when: os_family == "RedHat"
 
 - include: "Debian_reqs.yml"
-  when: ansible_os_family == "Debian"
+  when: os_family == "Debian"
 
 - name: Installs rbenv
   git: repo=git://github.com/sstephenson/rbenv.git dest=~{{ ansible_user_id }}/.rbenv

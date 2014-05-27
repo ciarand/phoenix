@@ -1,6 +1,17 @@
+- name: Check if "aptitude" is installed already
+  shell: which aptitude
+  ignore_errors: yes
+  register: aptitude_check
+
+- name: install aptitude by hand if necessary
+  sudo: yes
+  when: aptitude_check|changed
+  shell: apt-get install -y aptitude
+
 - name: Make sure APT is up to date
   sudo: yes
-  apt: update_cache=yes upgrade=yes
+  # cache for 12 hours
+  apt: update_cache=yes upgrade=yes cache_valid_time=43200
 
 - name: Install common packages on Debian
   sudo: yes

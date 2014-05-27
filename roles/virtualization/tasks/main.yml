@@ -1,13 +1,13 @@
 ---
 - name: install virtualbox and vagrant via brew-cask
-  when: ansible_os_family == "Darwin"
+  when: os_family == "Darwin"
   homebrew_cask: name={{ item }} state=installed
   with_items:
     - virtualbox
     - vagrant
 
 - name: install virtualbox and vagrant via apt
-  when: ansible_os_family == "Debian"
+  when: os_family == "Debian"
   apt: pkg={{ item }} state=installed
   sudo: yes
   with_items:

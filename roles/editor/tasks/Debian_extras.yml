@@ -1,11 +1,3 @@
 - name: Install fully featured vim in Debian
   sudo: yes
   apt : pkg=vim-gtk state=installed
-
-- name: Install fully featured vim in Darwin
-  register: installed_vim
-  homebrew: >
-    name=macvim
-    state=present
-    install_options=override-system-vi,with-lua,with-luajit,with-python3
-

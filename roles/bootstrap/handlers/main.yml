@@ -1,3 +1,8 @@
 ---
 - name: restart sshd
+  when: ansible_os_family == "elementary" or ansible_os_family == "Debian"
+  service: name=ssh state=restarted
+
+- name: restart sshd
+  when: ansible_os_family == "RedHat"
   service: name=sshd state=restarted

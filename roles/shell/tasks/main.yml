@@ -16,13 +16,13 @@
   file: path={{ home }}/.marks state=directory
 
 - name: install git via homebrew on Darwin
-  when: ansible_os_family == "Darwin"
+  when: os_family == "Darwin"
   homebrew: >
     name=git
     state=present
 
 - name: install git completion on Darwin
-  when: ansible_os_family == "Darwin"
+  when: os_family == "Darwin"
   copy: >
     src=99_homebrew_git_completion.bash
     dest={{ home }}/.bash.d/99_homebrew_git_completion.bash

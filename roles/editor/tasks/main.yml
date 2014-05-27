@@ -1,12 +1,12 @@
 # install vim dotfiles
 - include: "Darwin_extras.yml"
-  when: ansible_os_family == "Darwin"
+  when: os_family == "Darwin"
 
 - include: "RedHat_extras.yml"
-  when: ansible_os_family == "RedHat"
+  when: os_family == "RedHat"
 
 - include: "Debian_extras.yml"
-  when: ansible_os_family == "Debian"
+  when: os_family == "Debian"
 
 - name: install vimrc
   template: src=dotfiles/{{ item.src }} dest=~{{ ansible_user_id }}/{{ item.dest }}

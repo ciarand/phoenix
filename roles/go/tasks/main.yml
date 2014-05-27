@@ -10,13 +10,13 @@
 
 # grab the compile reqs
 - include: "Darwin_compile_reqs.yml"
-  when: ansible_os_family == "Darwin"
+  when: os_family == "Darwin"
 
 - include: "RedHat_compile_reqs.yml"
-  when: ansible_os_family == "RedHat"
+  when: os_family == "RedHat"
 
 - include: "Debian_compile_reqs.yml"
-  when: ansible_os_family == "Debian"
+  when: os_family == "Debian"
 
 - name: compile go if we need to
   include: compile.yml
