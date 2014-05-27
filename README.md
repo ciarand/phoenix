@@ -17,15 +17,26 @@ Running
 make install
 ```
 
+See the Makefile for other targets.
+
 What does it do?
 ----------------
+- Bootstraps a machine (SSH keys, sudoers file, etc.)
+
 - Sets up my dotfiles (see the dotfiles role and the [dotfiles][] folder)
+
+- Installs a full version of vim (compiling it if necessary)
+
+- Installs VirtualBox, packer, and vagrant
 
 - Sets up a working Ruby environment complete with rbenv and 4 or so Rubies
 
 - Sets up a working go environment (from source) and installs some basic bins
 
-- Replicates these scripts (repo included) to the target machine
+- Replicates these scripts (repo included) to the target machine, installs the
+  latest version of Ansible
+
+- Installs some essential apps in Debian (Chromium, Spotify, etc.)
 
 [dotfiles]: /dotfiles
 
@@ -34,7 +45,7 @@ What I want it to do
 - Setup a working PHP environment with 5.3 through 5.6 available
     - Include a "global" composer install
     - Include xdebug and phpdbg where applicable
-    - Run composer install with my the composer.lock from dotfiles
+    - Run composer install with the composer.lock from my dotfiles
 
 - Setup a working Clojure / ClojureScript environment
     - lein
@@ -51,9 +62,6 @@ What I want it to do
 
 - Setup a decent set of system-wide fonts (Google's, Powerline, etc.)
 
-- Setup a minimum set of applications via apt or brew-cask (Chrome, Spotify,
-  etc.)
-
 - Setup any cron jobs that need setting up
 
 - Setup a consistent backup solution
@@ -62,13 +70,7 @@ What I want it to do
 
 - Add some desktop-specific settings (OpenBox?)
 
-- Setup a working toolset for virtualization (packer, vagrant, VirtualBox)
-
 - Setup a Docker environment (on Debian at least)
-    - investigate whether we still need to muck with the kernel
-
-- Refactor roles into Ansible-galaxy roles
-    - a very low priority if we're being honest
 
 Credits
 -------
