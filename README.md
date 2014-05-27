@@ -33,6 +33,12 @@ What does it do?
 
 - Sets up a working go environment (from source) and installs some basic bins
 
+- Installs Java (openjdk on Debian)
+
+- Sets up a working Clojure environment with lein
+
+- Sets up a working Scala environment + sbt
+
 - Replicates these scripts (repo included) to the target machine, installs the
   latest version of Ansible
 
@@ -46,11 +52,6 @@ What I want it to do
     - Include a "global" composer install
     - Include xdebug and phpdbg where applicable
     - Run composer install with the composer.lock from my dotfiles
-
-- Setup a working Clojure / ClojureScript environment
-    - lein
-    - working JVM I guess
-    - closure compiler and ant (needs jvm, unrelated to clojure)
 
 - Setup a working Node environment
     - nvm
