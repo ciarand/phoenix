@@ -1,0 +1,26 @@
+# install ansible
+- name: make sure pip is installed
+  sudo: yes
+  easy_install: name=pip
+
+- name: install extra python libs through pip
+  sudo: yes
+  pip: name={{ item }}
+  with_items:
+    - paramiko
+    - PyYAML
+    - jinja2
+    - httplib2
+
+- name: make sure ~/src is a dir
+  file: path=~/src state=directory
+
+- name: clone ansible into src/ansible
+  git: >
+    repo=git://github.com/ansible/ansible.git 
+    dest=~/src/ansible
+    version=v1.6.2
+
+- name: install ansible
+  sudo: yes
+  shell: cd ~{{ ansible_user_id }}/src/ansible && bash -lc "make install"

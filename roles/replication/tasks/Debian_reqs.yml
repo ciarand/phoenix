@@ -1,0 +1,6 @@
+- name: install ansible reqs
+  sudo: yes
+  apt: pkg={{ item }} state=present
+  with_items:
+    - python-setuptools
+    - python-dev
