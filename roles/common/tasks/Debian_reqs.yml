@@ -2,6 +2,7 @@
   shell: which aptitude
   ignore_errors: yes
   register: aptitude_check
+  changed_when: aptitude_check.rc != 0
 
 - name: install aptitude by hand if necessary
   sudo: yes

@@ -11,6 +11,7 @@
     - { src: 'git/gitignore', dest: '.gitignore' }
     - { src: 'inputrc', dest: '.inputrc' }
     - { src: 'tmux.conf', dest: '.tmux.conf' }
+    - { src: 'tmux-osx.conf', dest: '.tmux-osx.conf' }
 
 - name: install .d dotfile dirs
   synchronize: >

@@ -15,16 +15,27 @@
 - name: make sure .marks dir exists on target
   file: path={{ home }}/.marks state=directory
 
-- name: install git via homebrew on Darwin
-  when: os_family == "Darwin"
-  homebrew: >
-    name=git
-    state=present
+- name: grab the tmux source
+  git: >
+    repo=git://git.code.sf.net/p/tmux/tmux-code
+    dest=~/src/tmux
+    version=1.9a
 
-- name: install git completion on Darwin
+- name: configure and make tmux
+  register: build_tmux
+  shell: cd ~/src/tmux && bash -lc "sh autogen.sh && ./configure && make"
+
+- name: install tmux
+  when: build_tmux|changed
+  sudo: yes
+  shell: cd ~{{ ansible_user_id }}/src/tmux && bash -lc "make install"
+
+- include: "Darwin_reqs.yml"
   when: os_family == "Darwin"
-  copy: >
-    src=99_homebrew_git_completion.bash
-    dest={{ home }}/.bash.d/99_homebrew_git_completion.bash
-    mode=700 owner={{ ansible_user_id }}
-    force=yes
+
+- include: "RedHat_reqs.yml"
+  when: os_family == "RedHat"
+
+- include: "Debian_reqs.yml"
+  when: os_family == "Debian"
+
