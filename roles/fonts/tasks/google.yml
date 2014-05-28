@@ -1,0 +1,23 @@
+- name: clone the Google fonts
+  hg: >
+    repo=https://code.google.com/p/googlefontdirectory/
+    dest=~/src/google-fonts
+
+- name: make sure there's a google-fonts directory
+  sudo: yes
+  file: >
+    path=/usr/share/fonts/truetype/google-fonts/
+    state=directory
+
+- name: install each of the fonts
+  sudo: yes
+  notify: reset the font cache
+  shell: >
+    cd && bash -lc "install -m644 {{ item }} /usr/share/fonts/truetype/google-fonts/"
+    creates=/usr/share/fonts/truetype/google-fonts/{{ item | basename }}
+  with_fileglob:
+    - ~{{ ansible_user_id }}/src/google-fonts/*/*.ttf
+    - ~{{ ansible_user_id }}/src/google-fonts/*/*/*.ttf
+
+
+

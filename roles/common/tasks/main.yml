@@ -1,6 +1,9 @@
 ---
-- name: Remove .bashrc (we use .bash_profile)
-  file: path=~{{ ansible_user_id }}/.bashrc state=absent
+- name: Symlink .bash_profile into .bashrc
+  file: >
+    src=~{{ ansible_user_id }}/.bash_profile
+    dest=~{{ ansible_user_id }}/.bashrc
+    state=link
 
 - name: make sure we have some important directories
   file: path={{ item }} state=directory
@@ -8,6 +11,11 @@
     - "~/managed-bin"
     - "~/src"
     - "~/code"
+
+- name: copy the source completion script
+  copy: >
+    src=99_plugin_completion.bash
+    dest=~/.bash.d/99_plugin_completion.bash
 
 - include: "Darwin_reqs.yml"
   when: os_family == "Darwin"

@@ -11,6 +11,9 @@
   roles:
     - role: common
 
+    - role: fonts
+      tags: ["fonts"]
+
     - role: shell
       tags: ["dotfiles", "shell"]
 
