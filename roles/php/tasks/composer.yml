@@ -9,7 +9,20 @@
     dest=~{{ ansible_user_id }}/.composer/vendor/bin
     state=link
 
+- name: symlink the composer.json and composer.lock files
+  # until we can figure out better pathing support, this is a hack
+  file: >
+    src={{ inventory_dir }}/../dotfiles/php/composer.{{ item }}
+    dest=~/.composer/composer.{{ item }}
+    state=link
+  with_items:
+    - lock
+    - json
+
 - name: grab composer
   shell: >
     cd && phpbrew install-composer
     creates=/home/ciarand/.phpbrew/.phpbrew/bin/composer
+
+- name: run composer global install
+  shell: cd && composer global install creates=/home

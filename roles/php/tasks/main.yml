@@ -30,7 +30,7 @@
 
 - name: install missing phps
   when: item not in installed_phps.stdout 
-  shell: cd; bash -lc "phpbrew install {{ item }} +default +mb +dbs +fpm +phar +intl +cgi +debug +exif +zlib"
+  shell: cd; bash -lc "phpbrew install {{ item }} +default +mb +dbs +fpm +phar +intl +cgi +debug +exif +zlib +openssl"
   with_items: php_versions
 
 - include: phpdbg.yml

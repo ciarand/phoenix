@@ -5,3 +5,5 @@ php_versions:
 
 php_build_dir: ~/.phpbrew/build
 php_bin_dir: ~/.phpbrew/php
+
+phpdbg_target_version: 0.3.2

@@ -1,6 +1,9 @@
 - name: install php5 deps (ansible apt module doesn't support build-dep)
   sudo: yes
   shell: apt-get build-dep -y php5
+  register: php5_build_dep
+  changed_when: >
+    "0 upgraded, 0 newly installed" not in php5_build_dep.stdout
 
 - name: install php53, dev-deps from apt
   sudo: yes
@@ -33,9 +36,7 @@
     - libjpeg8
     - libgd2-xpm-dev
     - libxpm4
-    - gettext
     - libgettextpo-dev
-    - libgettextpo0
     - libicu48
     - libicu-dev
     - libmhash-dev
@@ -66,8 +67,4 @@
     dest=/usr/lib/x86_64-linux-gnu/{{ item }}
     state=link
   with_items:
-    #- libXpm.a
-    #- libXpm.so
-    #- liblber.a
-    #- libldap_r.a
     - libc-client.a
