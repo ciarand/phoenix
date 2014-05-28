@@ -1,0 +1,18 @@
+- name: clone phpdbg for all phps
+  when: item | version_compare("5.4.0", ">=")
+  git: >
+    repo=https://github.com/krakjoe/phpdbg
+    dest={{ php_build_dir}}/php-{{ item }}/sapi/phpdbg
+    version=v0.3.2
+  with_items: php_versions
+
+- name: reconfigure the php source and build phpdbg
+  when: item | version_compare("5.4.0", ">=")
+  shell: >
+    cd {{ php_build_dir }}/php-{{ item }} && make distclean 2>/dev/null;
+    ./buildconf --force
+    && ./config.nice --enable-phpdbg
+    && make -j8
+    && make install-phpdbg
+    creates={{ php_bin_dir }}/php-{{ item }}/bin/phpdbg
+  with_items: php_versions

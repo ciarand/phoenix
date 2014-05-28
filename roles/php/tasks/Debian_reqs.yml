@@ -49,14 +49,25 @@
     - mysql-client
     - libmysqlclient-dev
     - libmysqld-dev
+    - libmysqlclient18
+    - libc-client2007e
+    - libc-client2007e-dev
+    - libfcgi-dev
+    - libfcgi0ldbl
+    - libjpeg62-dbg
+    - firebird2.1-dev
+    - firebird2.5-dev
+    - unixodbc-dev
 
-- name: grab phpbrew from the internet
-  get_url: >
-    url=https://raw.github.com/c9s/phpbrew/master/phpbrew
-    dest=~/managed-bin/phpbrew
-    mode=755
-  register: get_phpbrew
-
-- name: init phpbrew
-  when: get_phpbrew|changed
-  shell: cd; bash -lc "phpbrew init"
+- name: create some symlinks
+  sudo: yes
+  file: >
+    src=/usr/lib/{{ item }}
+    dest=/usr/lib/x86_64-linux-gnu/{{ item }}
+    state=link
+  with_items:
+    #- libXpm.a
+    #- libXpm.so
+    #- liblber.a
+    #- libldap_r.a
+    - libc-client.a
