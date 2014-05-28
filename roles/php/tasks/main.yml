@@ -34,3 +34,5 @@
   with_items: php_versions
 
 - include: phpdbg.yml
+
+- include: composer.yml

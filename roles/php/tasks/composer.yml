@@ -1,13 +1,3 @@
-- name: install composer
-  shell: bash -lc "cd; curl -sS https://getcomposer.org/installer | php"
-
-- name: make sure ~/bin exists
-  file: >
-    path={{ home }}/bin
-    state=directory
-
-#- name: move composer.phar into bin I guess. fuck it.
-
 - name: create the composer directory if it doesn't exist
   file: >
     path=~{{ ansible_user_id }}/.composer/vendor
@@ -18,3 +8,8 @@
     src=~{{ ansible_user_id }}/managed-bin
     dest=~{{ ansible_user_id }}/.composer/vendor/bin
     state=link
+
+- name: grab composer
+  shell: >
+    cd && phpbrew install-composer
+    creates=/home/ciarand/.phpbrew/.phpbrew/bin/composer
