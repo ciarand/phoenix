@@ -31,3 +31,9 @@
     - pulseaudio
     - pulseaudio-module-raop
     - inotify-tools
+    - pidgin
+    - pidgin-extprefs
+    - pidgin-mpris
+    - pidgin-themes
+    - pidgin-privacy-please
+    - pidgin-plugin-pack
