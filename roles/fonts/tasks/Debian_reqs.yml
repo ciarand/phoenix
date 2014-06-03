@@ -1,2 +1,9 @@
-- include: powerline.yml
+- name: make sure there's a google-fonts directory
+  sudo: yes
+  file: >
+    path=/usr/share/fonts/truetype/google-fonts/
+    state=directory
 
+- name: make sure there's an opentype dir
+  sudo: yes
+  file: path=/usr/share/fonts/opentype state=directory

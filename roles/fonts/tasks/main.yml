@@ -1,5 +1,3 @@
-- include: google.yml
-
 - include: "Darwin_reqs.yml"
   when: os_family == "Darwin"
 
@@ -9,3 +7,6 @@
 - include: "Debian_reqs.yml"
   when: os_family == "Debian"
 
+- include: google.yml
+
+- include: powerline.yml

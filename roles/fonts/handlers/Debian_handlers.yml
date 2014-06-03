@@ -1,0 +1,22 @@
+- name: reset the font cache
+  shell: fc-cache -fv > /dev/null
+
+- name: install google fonts
+  notify: reset the font cache
+  sudo: yes
+  shell: >
+   bash -lc "install -m644 {{ item }} /usr/share/fonts/truetype/google-fonts/"
+    creates=/usr/share/fonts/truetype/google-fonts/{{ item | basename }}
+  with_fileglob:
+    - ~{{ ansible_user_id }}/src/google-fonts/*/*.ttf
+    - ~{{ ansible_user_id }}/src/google-fonts/*/*/*.ttf
+
+- name: install powerline fonts
+  notify: reset the font cache
+  sudo: yes
+  copy: >
+    src=~{{ ansible_user_id }}/src/powerline/font/{{ item.src }}
+    dest={{ item.dest }}
+  with_items:
+    - { src: "PowerlineSymbols.otf", dest: "/usr/share/fonts/opentype/" }
+    - { src: "10-powerline-symbols.conf", dest: "/etc/fonts/conf.d/" }

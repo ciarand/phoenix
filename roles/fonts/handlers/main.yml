@@ -1,2 +1,8 @@
-- name: reset the font cache
-  shell: fc-cache -fv > /dev/null
+- include: "Darwin_handlers.yml"
+  when: os_family == "Darwin"
+
+- include: "RedHat_handlers.yml"
+  when: os_family == "RedHat"
+
+- include: "Debian_handlers.yml"
+  when: os_family == "Debian"

@@ -1,0 +1,24 @@
+- name: reset the font cache
+  assert: { that: true }
+
+- name: install google fonts
+  sudo: yes
+  copy: >
+    src={{ item }}
+    dest=/Library/Fonts/
+    owner={{ ansible_user_id }}
+    mode=0644
+  with_fileglob:
+    - ~{{ ansible_user_id }}/src/google-fonts/*/*.ttf
+    - ~{{ ansible_user_id }}/src/google-fonts/*/*/*.ttf
+
+- name: install powerline fonts
+  sudo: yes
+  copy: >
+    src={{ item }}
+    dest=/Library/Fonts/
+    owner={{ ansible_user_id }}
+    mode=0644
+  with_fileglob:
+    - ~{{ ansible_user_id }}/src/powerline-fonts/**/*.ttf
+    - ~{{ ansible_user_id }}/src/powerline-fonts/**/*.otf

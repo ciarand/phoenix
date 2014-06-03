@@ -1,23 +1,11 @@
 - name: clone the powerline repo
+  notify: install powerline fonts
   git: >
     repo=https://github.com/Lokaltog/powerline.git
     dest=~/src/powerline
 
-- name: make sure there's an opentype dir
-  sudo: yes
-  file: path=/usr/share/fonts/opentype state=directory
-
-- name: move PowerlineSymbols.otf to the fonts dir
-  sudo: yes
-  notify: reset the font cache
-  copy: >
-    src=~{{ ansible_user_id }}/src/powerline/font/PowerlineSymbols.otf
-    dest=/usr/share/fonts/opentype/
-
-- name: install powerline-symbols into the fontconfig dir
-  sudo: yes
-  notify: reset the font cache
-  copy: >
-    src=~{{ ansible_user_id }}/src/powerline/font/10-powerline-symbols.conf
-    dest=/etc/fonts/conf.d/
-
+- name: clone the powerline-fonts repo
+  notify: install powerline fonts
+  git: >
+    repo=git@github.com:Lokaltog/powerline-fonts.git
+    dest=~/src/powerline-fonts
