@@ -21,8 +21,12 @@
 
 - name: grab composer
   shell: >
-    phpbrew install-composer
-    creates=/home/ciarand/.phpbrew/.phpbrew/bin/composer
+    bash -lc "phpbrew switch {{ item.version }} && phpbrew install-composer"
+    creates=~/.phpbrew/.phpbrew/bin/composer
+  with_items:
+    - "{{ php_versions | last }}"
 
 - name: run composer global install
+  register: composer_global_install
   shell: cd && composer global install creates=/home
+  changed_when: '"Nothing to install or update" not in composer_global_install.stdout'

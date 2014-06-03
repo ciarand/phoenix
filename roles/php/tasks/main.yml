@@ -29,7 +29,7 @@
   changed_when: false
 
 - name: install missing phps
-  when: item.version not in installed_phps.stdout 
+  when: item.version not in installed_phps.stdout
   shell: bash -lc "phpbrew install {{ item.version }} {{ item.flags }}"
   with_items: php_versions
 
