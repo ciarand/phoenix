@@ -21,7 +21,7 @@
 
 - name: grab composer
   shell: >
-    cd && phpbrew install-composer
+    phpbrew install-composer
     creates=/home/ciarand/.phpbrew/.phpbrew/bin/composer
 
 - name: run composer global install

@@ -16,7 +16,7 @@
 
 - name: init phpbrew
   when: get_phpbrew|changed
-  shell: cd; bash -lc "phpbrew init"
+  shell: bash -lc "phpbrew init"
 
 - name: copy the source phpbrew thing
   copy: >
@@ -25,12 +25,12 @@
 
 - name: check which phps we have installed
   register: installed_phps
-  shell: cd; bash -lc "phpbrew list"
+  shell: bash -lc "phpbrew list"
   changed_when: false
 
 - name: install missing phps
-  when: item not in installed_phps.stdout 
-  shell: cd; bash -lc "phpbrew install {{ item }} +default +mb +dbs +fpm +phar +intl +cgi +debug +exif +zlib +openssl"
+  when: item.version not in installed_phps.stdout 
+  shell: bash -lc "phpbrew install {{ item.version }} {{ item.flags }}"
   with_items: php_versions
 
 - include: phpdbg.yml

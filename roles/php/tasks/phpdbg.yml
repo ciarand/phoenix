@@ -1,27 +1,18 @@
-- name: check current version of phpdbg
-  register: phpdbg_version
-  changed_when: false
-  ignore_errors: yes
-  shell: cd && phpdbg --version
-
-- name: decide whether the phpdbg bin exists
-  set_fact: phpdbg_bin_exists={{ phpdbg_version.rc == 0 | bool }}
-
 - name: clone phpdbg for all phps
-  when: not phpdbg_bin_exists and item | version_compare("5.4.0", ">=")
+  when: item.version | version_compare("5.4.0", ">=")
   git: >
     repo=https://github.com/krakjoe/phpdbg
-    dest={{ php_build_dir}}/php-{{ item }}/sapi/phpdbg
+    dest={{ php_build_dir}}/php-{{ item.version }}/sapi/phpdbg
     version=v{{ phpdbg_target_version }}
   with_items: php_versions
 
 - name: reconfigure the php source and build phpdbg
-  when: not phpdbg_bin_exists and item | version_compare("5.4.0", ">=")
+  when: item.version | version_compare("5.4.0", ">=")
   shell: >
-    cd {{ php_build_dir }}/php-{{ item }} && make distclean 2>/dev/null;
+    cd {{ php_build_dir }}/php-{{ item.version }} && make distclean 2>/dev/null;
     ./buildconf --force
     && ./config.nice --enable-phpdbg
     && make -j8
     && make install-phpdbg
-    creates={{ php_bin_dir }}/php-{{ item }}/bin/phpdbg
+    creates={{ php_bin_dir }}/php-{{ item.version }}/bin/phpdbg
   with_items: php_versions

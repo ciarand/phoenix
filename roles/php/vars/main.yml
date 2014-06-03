@@ -1,7 +1,9 @@
+default_build_flags: +default +mb +dbs +fpm +phar +cgi +debug +exif +zlib +openssl
+
 php_versions:
-  - 5.3.28
-  - 5.4.28
-  - 5.5.12
+  - { version: 5.3.28, flags: "{{ default_build_flags }}" }
+  - { version: 5.4.28, flags: "{{ default_build_flags }} +intl" }
+  - { version: 5.5.12, flags: "{{ default_build_flags }} +intl" }
 
 php_build_dir: ~/.phpbrew/build
 php_bin_dir: ~/.phpbrew/php

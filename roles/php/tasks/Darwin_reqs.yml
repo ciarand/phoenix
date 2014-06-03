@@ -1,0 +1,31 @@
+- name: check to see whether gettext was compiled as a --universal binary
+  register: brew_info_gettext
+  shell: brew info gettext
+  changed_when: false
+
+- name: remove gettext if it wasn't built with --universal support
+  when: "'Built from source with: --universal' not in brew_info_gettext.stdout"
+  homebrew: name=gettext state=absent
+
+- name: install gettext as a --universal binary if it wasn't already
+  homebrew: name=gettext install_options=universal state=latest
+
+- name: install required prereqs in homebrew
+  homebrew: name={{ item }} state=latest
+  with_items:
+    - automake
+    - autoconf
+    - curl
+    - pcre
+    - re2c
+    - mhash
+    - libtool
+    - icu4c
+    - jpeg
+    - libxml2
+    - mcrypt
+    - gmp
+    - libevent
+
+- name: link icu4c
+  homebrew: name=icu4c state=linked install_options=force,overwrite
