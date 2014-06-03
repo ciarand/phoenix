@@ -1,0 +1,8 @@
+- name: Install extra dependencies
+  sudo: yes
+  apt : pkg={{ item }} state=installed
+  with_items:
+    - libgtk2.0-dev
+    - libwebkit-dev
+    - libunique-dev
+    - sqlite3

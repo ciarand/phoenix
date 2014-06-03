@@ -24,7 +24,7 @@
       tags: ["dotfiles", "editor"]
 
     - role: languages
-      tags: ["go", "ruby", "rbenv", "scala", "clojure"]
+      tags: ["go", "ruby", "rbenv", "scala", "clojure", "php", "lua"]
 
     - role: replication
       tags: ["config"]
@@ -34,6 +34,3 @@
 
     - role: packaging
       tags: ["packaging"]
-
-    - role: php
-      tags: ["php"]

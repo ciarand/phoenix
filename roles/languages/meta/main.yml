@@ -1,5 +1,6 @@
 ---
 dependencies:
+  - { role: lua }
   - { role: go }
   - { role: rbenv }
   - { role: ruby-multi, versions: [2.1.0, 2.0.0-p353, 1.9.3-p484] }

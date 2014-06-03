@@ -14,19 +14,6 @@
     - libextutils-xspp-perl
     - tcl-dev
 
-- name: clone the source for luajit
-  git: >
-    repo=http://luajit.org/git/luajit-2.0.git
-    dest=~/src/luajit
-    version=v2.0.3
-
-- name: compile luajit
-  shell: cd ~/src/luajit && bash -lc "make"
-
-- name: install luajit
-  sudo: yes
-  shell: cd ~{{ ansible_user_id }}/src/luajit && make install
-
 - name: clone the vim source (because we're compiling from scratch)
   hg: >
     repo=https://vim.googlecode.com/hg/
