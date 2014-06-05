@@ -24,14 +24,13 @@
         "behat/mink-selenium-driver": "~1.0",
         "behat/mink-selenium2-driver": "~1.0",
 
-        "phpunit/phpunit": "~3.7",
-        "phpunit/php-invoker": "*",
+        "phpunit/phpunit": "~4.1",
 
         "drush/drush": "~6.2.0",
 
         "phpspec/phpspec": "2.0.*@dev",
         "danielstjules/pho": "dev-master",
-        "psy/psysh": "dev-master"
+        "psy/psysh": "dev-master",
     },
     "config": {
         "vendor-dir": "vendor",
