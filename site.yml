@@ -26,11 +26,12 @@
     - role: languages
       tags: ["go", "ruby", "rbenv", "scala", "clojure", "php", "lua"]
 
-    - role: replication
-      tags: ["config"]
-
     - role: virtualization
       tags: ["virtualization"]
 
     - role: packaging
       tags: ["packaging"]
+
+    - role: replication
+      tags: ["config"]
+
