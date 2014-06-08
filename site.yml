@@ -32,6 +32,9 @@
     - role: packaging
       tags: ["packaging"]
 
+    - role: desktop
+      tags: ["desktop"]
+
     - role: replication
       tags: ["config"]
 
