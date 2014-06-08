@@ -1,2 +1,2 @@
 ---
-go_version_target: "go1.2.2"
+go_version_target: "go1.3rc1"
