@@ -1,9 +1,16 @@
+- name: install some core stuff
+  apt: pkg={{ item }} state=latest install_recommends=no
+  with_items:
+    - python
+    - python-apt
+    - sudo
+
 - name: make sure there's a wheel group
   group: name=wheel state=present
 
 - name: make sure there's a user account
   user: >
-    name=ciarand
+    name={{ ssh_user }}
     state=present
     groups=wheel
     append=yes
@@ -19,7 +26,7 @@
 
 - name: make sure user account has our public ssh key
   authorized_key: >
-    user=ciarand
+    user={{ ssh_user }}
     key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
 - name: Disallow unsafe SSH practices
