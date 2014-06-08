@@ -20,6 +20,7 @@
   with_items:
     - mosh
     - git
+    - mercurial
     - bash
     - bash-completion
     - locate
