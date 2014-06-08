@@ -35,7 +35,7 @@ What does it do?
 
 - Installs dotfiles (see the dotfile / shell roles and the [dotfiles][] folder)
 
-- Installs a full version of Vim (compiling it from scratch pretty mcuh all the
+- Installs a full version of Vim (compiling it from scratch pretty much all the
   time)
 
 - Installs VirtualBox, packer, and vagrant
