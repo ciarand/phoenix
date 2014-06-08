@@ -12,6 +12,7 @@
     - { src: 'inputrc', dest: '.inputrc' }
     - { src: 'tmux.conf', dest: '.tmux.conf' }
     - { src: 'tmux-osx.conf', dest: '.tmux-osx.conf' }
+    - { src: 'xmodmap', dest: '.Xmodmap' }
 
 - name: install .d dotfile dirs
   synchronize: >

@@ -1,0 +1,20 @@
+- name: grab the tmux source
+  register: clone_tmux
+  git: >
+    repo=git://git.code.sf.net/p/tmux/tmux-code
+    dest=~/src/tmux
+    version=1.9a
+
+- name: clean the tmux src folder
+  when: clone_tmux|changed
+  shell: cd ~/src/tmux && bash -lc "make distclean clean"
+
+- name: configure and make tmux
+  shell: >
+    cd ~/src/tmux && bash -lc "sh autogen.sh && ./configure && make"
+    creates=~/src/tmux/tmux
+
+- name: install tmux
+  when: build_tmux|changed
+  sudo: yes
+  shell: cd ~{{ ansible_user_id }}/src/tmux && bash -lc "make install"
