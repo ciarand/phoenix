@@ -1,0 +1,3 @@
+- name: install xorg
+  sudo: yes
+  apt: pkg=xorg state=installed

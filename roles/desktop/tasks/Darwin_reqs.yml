@@ -1,0 +1,38 @@
+- name: set some default behaviors
+  shell: "defaults write {{ item }}"
+  notify: restart core apps
+  with_items:
+    # use list view in finder
+    - com.apple.Finder FXPreferredViewStyle Nlsv
+    # turn off the weird hold the key for key variations thing
+    - -g ApplePressAndHoldEnabled -bool false
+    # set a low key repeat rate
+    - NSGlobalDomain KeyRepeat -int 0
+    # don't create the desktop thing
+    - com.apple.finder CreateDesktop -bool false
+    # show all hidden files
+    - com.apple.Finder AppleShowAllFiles YES
+    # allow tabbing through all inputs
+    - NSGlobalDomain AppleKeyboardUIMode -int 3
+    # show the full path in Finder
+    - com.apple.finder _FXShowPosixPathInTitle -bool true
+    # don't create .DS_store files on network drives (why is this not default?)
+    - com.apple.desktopservices DSDontWriteNetworkStores -bool true
+    # disable any file extension change warning (see: i'm an adult)
+    - com.apple.finder FXEnableExtensionChangeWarning -bool false
+    # expand save dialogs by default (see: i'm an adult)
+    - -g NSNavPanelExpandedStateForSaveMode -bool YES
+    # Development menu in Safari
+    - com.apple.safari IncludeDebugMenu -bool YES
+    # Set up Safari for development.
+    - com.apple.Safari IncludeInternalDebugMenu -bool true
+    - com.apple.Safari IncludeDevelopMenu -bool true
+    - com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+    - com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+    - NSGlobalDomain WebKitDeveloperExtras -bool true
+    # Show status bar in Finder
+    - com.apple.finder ShowStatusBar -bool true
+    # disable shadow in screenshots
+    - com.apple.screencapture disable-shadow -bool true
+    # only utf-8 in terminal.app
+    - com.apple.terminal StringEncodings -array 4

@@ -1,0 +1,28 @@
+- include: "Darwin_reqs.yml"
+  when: os_family == "Darwin"
+
+- include: "RedHat_reqs.yml"
+  when: os_family == "RedHat"
+
+- include: "Debian_reqs.yml"
+  when: os_family == "Debian"
+
+#- name: clone awesome
+#register:
+#git: >
+#repo=
+#dest=
+#version=
+#
+#- name: compile awesome
+#when:
+#shell: make creates=
+#
+#- name: install awesome
+#sudo: yes
+#when: 
+#shell: make install creates
+#
+#- name: setup xinit
+#
+#- name: setup bash_profile to call xorg

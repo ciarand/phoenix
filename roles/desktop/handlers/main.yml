@@ -1,0 +1,11 @@
+- name: restart core apps
+  shell: killall {{ item }}
+  when: os_family == "Darwin"
+  # ignore any errors like "xcode isn't running!"
+  ignore_errors: true
+  with_items:
+    - Finder
+    - Dock
+    - Xcode
+    - Safari
+    - Mail
