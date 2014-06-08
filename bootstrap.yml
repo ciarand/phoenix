@@ -1,4 +1,8 @@
 - hosts: desktop
+  user: root
+  sudo: no
+  vars:
+    - ssh_user: "{{ lookup('env', 'USER') }}"
   roles:
     - role: bootstrap
       sudo: yes
