@@ -1,0 +1,38 @@
+- name: add the gpg key thing
+  sudo: yes
+  register: add_apt_keys
+  apt_key: >
+    url=http://apt.mopidy.com/mopidy.gpg
+    state=present
+
+- name: add the mopidy apt ppa thing
+  sudo: yes
+  register: add_apt_repos
+  apt_repository: repo={{ item }} state=present
+  with_items:
+    - deb http://apt.mopidy.com/ stable main contrib non-free
+    - deb-src http://apt.mopidy.com/ stable main contrib non-free
+
+- name: force a refresh of the cache
+  when: add_apt_keys|changed or add_apt_repos|changed
+  sudo: yes
+  apt: update_cache=yes
+
+- name: install mopidy + extensions + maybe some other stuff
+  sudo: yes
+  apt: pkg={{ item }} state=present
+  with_items:
+    - mopidy
+    - mopidy-spotify
+    - mopidy-soundcloud
+    - ncmpcpp
+
+- name: probably setup mopidy as a system service
+
+- name: figure out how to do passwords safely
+
+- name: write up a config file I guess
+
+- name: maybe setup an http servery thing
+
+- name: should setup a set of keyboard shortcuts in the desktop role
