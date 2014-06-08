@@ -25,11 +25,12 @@ What does it do?
 
 - Installs dotfiles (see the dotfile / shell roles and the [dotfiles][] folder)
 
-- Installs a full version of Vim (compiling it if necessary)
+- Installs a full version of Vim (compiling it from scratch pretty mcuh all the
+  time)
 
 - Installs VirtualBox, packer, and vagrant
 
-- Sets up a working Ruby environment complete with rbenv and 4 or so Rubies
+- Sets up a working Ruby environment complete with rbenv and 3 or so Rubies
 
 - Sets up a working Go environment (from source) and installs some basic bins
 
@@ -41,18 +42,16 @@ What does it do?
 
 - Sets up a working PHP environment with 5.3 through 5.5, phpdbg, and composer
 
+- Installs some essential apps in Debian (Chromium, Spotify, etc.)
+
 - Replicates these scripts (repo included) to the target machine, installs the
   latest version of Ansible
-
-- Installs some essential apps in Debian (Chromium, Spotify, etc.)
 
 [dotfiles]: /dotfiles
 
 Wishlist
 --------
 - Better checking for "changed" stuff
-
-- Better separation of languages - e.g. lua should be its own playbook
 
 - Quicker git repo checks; making an HTTP request takes too long
 
@@ -64,15 +63,21 @@ Wishlist
 
 - Check to make sure all required services are enabled
 
-- Setup a decent set of system-wide fonts (Google's, Powerline, etc.)
-
 - Setup any cron jobs that need setting up
 
 - Setup tarsnap
 
 - Figure out a way of handling private-key transfers
 
-- Add some desktop-specific settings (OpenBox?)
+- Add some desktop-specific settings (awesomewm)
+
+- Conky
+
+- Desktop background
+
+- Nicer, actionable notifications
+
+- Airplay or similar? Maybe using Raspberry Pi
 
 - Switch to luakit browser, customize it
 
@@ -85,6 +90,12 @@ Wishlist
 - Either setup mutt or find a cross platform email solution
 
 - Change shell prompt to show hostname
+
+Complaints about current Linux distros I've developed along the way
+-------------------------------------------------------------------
+See the [`COMPLAINTS`][complaints] file.
+
+[complaints]: /COMPLAINTS.md
 
 Credits
 -------
