@@ -1,0 +1,13 @@
+# TODO I don't know what this looks like if it finds any? also Ubuntu 14.04
+# uses a different interface: http://askubuntu.com/questions/22118/
+- name: do a check for additional drivers
+  shell: jockey-text
+
+- name: what key bindings are we using?
+  register: gtk_key_bindings
+  changed_when: false
+  shell: gsettings get org.gnome.desktop.interface gtk-key-theme
+
+- name: emacs key bindings everywhere because muscle memory
+  when: "Emacs" not in gtk_key_bindings.stdout
+  shell: gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
