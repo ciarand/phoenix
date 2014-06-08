@@ -4,20 +4,30 @@ Phoenix
 
 Prerequisites
 -------------
-Works on Mac OS X and Debian. On a Debian machine it doesn't expect much outside
-of the base config and a working SSH connection. On a Mac it needs Homebrew
-([brew.sh][brew]) and maybe some other stuff like Xcode CLI tools. I don't have
-a fresh installation to test with so you're kind of on your own for that one.
+Works on Mac OS X and Debian and kind of on RedHat. On a Debian machine it
+doesn't expect much outside of the base config and a working SSH connection. On
+a Mac it needs Homebrew ([brew.sh][brew]) and maybe some other stuff like Xcode
+CLI tools. I don't have a fresh installation to test with so you're kind of on
+your own for that one.
 
 [brew]: http://brew.sh
 
 Running
 -------
 ```bash
+# to install locally
+make local
+# to install just a specific tag (see site.yml) locally
+TAGS=dotfiles make local-tags
+
+# to install on all machines in etc/hosts
 make install
+# to install just a specific tag (see site.yml) on all machines in etc/hosts
+TAGS=dotfiles make install-tags
 ```
 
-See the Makefile for other targets.
+See the Makefile for other targets and stuff. I'm not very good at writing
+Makefiles tbh.
 
 What does it do?
 ----------------
