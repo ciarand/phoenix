@@ -36,3 +36,5 @@
     - com.apple.screencapture disable-shadow -bool true
     # only utf-8 in terminal.app
     - com.apple.terminal StringEncodings -array 4
+    # disable the dashboard thing
+    - com.apple.dashboard mcx-disabled -bool true
