@@ -1,15 +1,16 @@
 - name: grab the tmux source
-  register: clone_tmux
   git: >
     repo=git://git.code.sf.net/p/tmux/tmux-code
     dest=~/src/tmux
     version=1.9a
+  register: clone_tmux
 
 - name: clean the tmux src folder
   when: clone_tmux|changed
   shell: cd ~/src/tmux && bash -lc "make distclean clean"
 
 - name: configure and make tmux
+  register: build_tmux
   shell: >
     cd ~/src/tmux && bash -lc "sh autogen.sh && ./configure && make"
     creates=~/src/tmux/tmux
