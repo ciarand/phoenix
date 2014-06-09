@@ -2,6 +2,7 @@ vim_options: >
   --enable-fail-if-missing
   --enable-luainterp
   --with-luajit
+  --with-lua-prefix=/usr/local
   --enable-perlinterp
   --enable-pythoninterp
   --enable-python3interp

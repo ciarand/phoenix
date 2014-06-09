@@ -8,6 +8,8 @@
 - include: "Debian_extras.yml"
   when: os_family == "Debian"
 
+- include: compile.yml
+
 - name: install vimrc
   template: src=dotfiles/{{ item.src }} dest=~{{ ansible_user_id }}/{{ item.dest }}
   with_items:
@@ -24,5 +26,4 @@
     dest=~{{ ansible_user_id }}/.vim/bundle/Vundle.vim
 
 - name: Run Vundle's PluginInstall to grab the latest
-  shell: cd; bash -lc "vim +PluginInstall +qall"
-  when: installed_vim|changed
+  shell: cd; bash -lc "vim +PluginInstall +qall" creates=~/.vim/bundle

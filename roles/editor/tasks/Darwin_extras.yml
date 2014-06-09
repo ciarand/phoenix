@@ -1,12 +1,10 @@
-- name: install extra deps
-  homebrew: name={{ item }} state=present
+- name: Install compile requirements
+  homebrew: name={{ item }} state=installed
   with_items:
-    - luajit
-
-- name: Install fully featured vim in Darwin
-  register: installed_vim
-  homebrew: >
-    name=macvim
-    state=present
-    install_options=override-system-vi,with-lua,with-luajit,with-python3
-
+    - git
+    - mercurial
+    - ctags
+    - perl518
+    - python3
+    - python
+    - tcl-tk

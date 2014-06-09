@@ -1,0 +1,15 @@
+- name: clone the vim source (because we're compiling from scratch)
+  hg: >
+    repo=https://vim.googlecode.com/hg/
+    dest=~/src/vim
+    revision=v7-4-307
+
+- name: import vim installation variables
+  include_vars: "main.yml"
+
+- name: configure and compile the vim source
+  shell: "cd ~/src/vim && make distclean && ./configure {{ vim_options }}"
+
+- name: install the just-compiled vim bins
+  sudo: yes
+  shell: cd ~{{ ansible_user_id }}/src/vim && make install
