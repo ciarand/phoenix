@@ -7,8 +7,14 @@
 - include: "Debian_reqs.yml"
   when: os_family == "Debian"
 
+# install normal lua
+- include: lua.yml
+
+# install luajit
 - include: luajit.yml
 
-- include: luarocks.yml
+# not working
+#- include: luarocks.yml
 
-- include: luakit.yml
+# not working
+#- include: luakit.yml

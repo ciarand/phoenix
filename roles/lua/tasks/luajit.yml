@@ -11,9 +11,7 @@
 
 - name: compile luajit
   register: compile_luajit
-  shell: >
-    cd ~/src/luajit && bash -lc "make"
-    creates=~/src/luajit/src/luajit
+  shell: cd ~/src/luajit && bash -lc "make" creates=~{{ ansible_user_id }}/src/luajit/src/luajit
 
 - name: install luajit
   when: compile_luajit|changed
