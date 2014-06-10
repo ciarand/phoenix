@@ -12,6 +12,11 @@
     src="dotfiles/bash.d/"
     dest={{ home }}/.bash.d
 
+- name: copy the source completion script
+  copy: >
+    src=99_plugin_completion.bash
+    dest=~/.bash.d/99_plugin_completion.bash
+
 - name: make sure .marks dir exists on target
   file: path={{ home }}/.marks state=directory
 
