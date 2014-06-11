@@ -11,6 +11,9 @@
   roles:
     - role: common
 
+    - role: perl
+      tags: ["perl"]
+
     - role: fonts
       tags: ["fonts"]
 
