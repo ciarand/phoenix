@@ -15,3 +15,18 @@
 - include: "Debian_reqs.yml"
   when: os_family == "Debian"
 
+- name: find various ssh keys
+  shell: ssh-keyscan {{ item }}
+  register: source_control_host_keys
+  with_items:
+    - github.com
+    - bitbucket.org
+    - code.google.com
+
+- name: SSH | Add Git repo host key to known_hosts file
+  lineinfile: >
+    create=yes
+    dest=~{{ ansible_user_id }}/.ssh/known_hosts
+    state=present
+    line='{{ item.stdout }}'
+  with_items: source_control_host_keys.results
