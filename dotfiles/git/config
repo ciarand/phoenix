@@ -26,7 +26,7 @@
     d = difftool
     nws = !sh -c 'git diff -w --no-color "$@" | git apply --cached --ignore-whitespace' -
     hash = rev-parse --short HEAD
-    lg = g --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [color]
     diff = auto
