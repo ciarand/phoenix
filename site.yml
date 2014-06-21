@@ -24,7 +24,7 @@
       tags: ["dotfiles"]
 
     - role: editor
-      tags: ["dotfiles", "editor"]
+      tags: ["editor"]
 
     - role: languages
       tags: ["go", "ruby", "rbenv", "scala", "clojure", "php", "lua"]

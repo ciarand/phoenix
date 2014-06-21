@@ -43,4 +43,10 @@ local-debug:
 ssh-key:
 	ssh-copy-id -i ~/.ssh/id_rsa.pub ciarand@${TARGET}
 
+dotfiles:
+	TAGS=dotfiles make local-tags
+
+editor:
+	TAGS=editor make local-tags
+
 .PHONY: install debug dotfiles dotfiles-debug go go-debug local tags ssh-key
