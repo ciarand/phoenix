@@ -23,14 +23,16 @@
     src=/tmp/lua_source.tar.gz
 
 - name: configure and make
-  when: os_family == "Darwin"
   register: build_lua
-  shell: cd ~/src/lua/lua-5.2.3 && make macosx
+  when: os_family == "Darwin"
+  shell: cd ~/src/lua/lua-5.2.3 && make macosx creates=~/src/lua/lua-5.2.3/src/lua
 
 - name: configure and make
+  register: build_lua
   when: os_family != "Darwin"
-  shell: cd ~/src/lua/lua-5.2.3 && make linux
+  shell: cd ~/src/lua/lua-5.2.3 && make linux creates=~/src/lua/lua-5.2.3/src/lua
 
 - name: install
+  when: build_lua|changed
   sudo: yes
   shell: cd ~{{ ansible_user_id }}/src/lua/lua-5.2.3 && make install
