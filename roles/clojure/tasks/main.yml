@@ -13,17 +13,17 @@
   # shell script they're using gets confused and complains about bootstrapping
   git: >
     repo=https://github.com/technomancy/leiningen.git
-    dest=~/src/lein
+    dest={{ home }}/src/lein
     version=2.3.4
 
 - name: copy the bin script in
   register: copy_leiningen
   copy: >
-    src=~/src/lein/bin/lein
-    dest=~/managed-bin/lein
+    src={{ home }}/src/lein/bin/lein
+    dest={{ home }}/managed-bin/lein
     mode=755
     owner={{ ansible_user_id }}
 
 - name: run the lein bootstrap script
   when: copy_leiningen|changed or clone_leiningen|changed
-  shell: cd && lein
+  shell: cd && bash -lc "lein"

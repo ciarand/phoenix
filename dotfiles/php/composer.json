@@ -2,35 +2,16 @@
     "require": {
         "phing/phing": "dev-master",
 
-        "symfony/http-kernel": "*",
-        "symfony/proxy-manager-bridge": "*",
-        "symfony/class-loader": "*",
-        "symfony/form": "*",
-        "symfony/validator": "*",
-
-        "zendframework/zend-servicemanager": "*",
-        "zendframework/zend-di": "*",
-
         "squizlabs/php_codesniffer": "~1.5.0",
 
         "phpmd/phpmd" : "~1.5.0",
-        "d11wtq/boris": "dev-master",
-
-        "behat/behat": "2.4.*@stable",
-        "behat/mink": "~1.5.0",
-        "behat/mink-extension": "~1.1",
-        "behat/mink-goutte-driver": "~1.0",
-        "behat/mink-zombie-driver": "~1.0",
-        "behat/mink-selenium-driver": "~1.0",
-        "behat/mink-selenium2-driver": "~1.0",
 
         "phpunit/phpunit": "~4.1",
-
-        "drush/drush": "~6.2.0",
 
         "phpspec/phpspec": "2.0.*@dev",
         "danielstjules/pho": "dev-master",
         "psy/psysh": "dev-master",
+        "anahkiasen/rocketeer": "~1.2.2"
     },
     "config": {
         "vendor-dir": "vendor",

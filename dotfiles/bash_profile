@@ -3,5 +3,7 @@
 export EDITOR="vim"
 export GIT_EDITOR=$EDITOR
 
+set -o vi
+
 # include all files in .bash.d
 for f in ~/.bash.d/*; do source $f; done

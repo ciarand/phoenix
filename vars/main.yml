@@ -1,2 +1,2 @@
 gopath: ~/code/go
-home: ~{{ ansible_user_id }}
+config_dir: "{{ home }}/config"

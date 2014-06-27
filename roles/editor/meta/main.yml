@@ -1,5 +1,4 @@
 ---
 dependencies:
   - { role: common }
-  - { role: lua }
-  - { role: rbenv }
+  - { role: languages }

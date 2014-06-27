@@ -2,19 +2,19 @@
   register: clone_luajit_source
   git: >
     repo=http://luajit.org/git/luajit-2.0.git
-    dest=~/src/luajit
+    dest={{ home }}/src/luajit
     version=v2.0.3
 
 - name: clean the install folder if it needs to be
   when: clone_luajit_source|changed
-  shell: cd ~/src/luajit && bash -lc "make clean"
+  shell: cd {{ home }}/src/luajit && bash -lc "make clean"
 
 - name: compile luajit
   register: compile_luajit
-  shell: cd ~/src/luajit && bash -lc "make" creates=~{{ ansible_user_id }}/src/luajit/src/luajit
+  shell: cd {{ home }}/src/luajit && bash -lc "make" creates={{ home }}/luajit
 
 - name: install luajit
   when: compile_luajit|changed
   sudo: yes
-  shell: cd ~{{ ansible_user_id }}/src/luajit && make install
+  shell: cd {{ home }}/luajit && make install
 

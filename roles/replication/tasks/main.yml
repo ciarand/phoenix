@@ -8,12 +8,12 @@
 - include: "Debian_reqs.yml"
   when: os_family == "Debian"
 
-- name: make sure the ~/code/config dir exists
-  file: path=~{{ ansible_user_id }}/code/config state=directory
+- name: make sure the {{ home }}/code/config dir exists
+  file: path={{ home }}/code/config state=directory
 
 - name: copy the current set of playbooks to the new machine
   synchronize:  >
     src={{ inventory_dir }}/../
-    dest=~{{ ansible_user_id }}/code/config
+    dest={{ config_dir }}
     recursive=yes
 

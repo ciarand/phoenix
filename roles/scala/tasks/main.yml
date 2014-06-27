@@ -17,6 +17,7 @@
   unarchive: >
     src=/tmp/{{ scala_archive_file }}
     dest={{ scala_lib_path }}
+    copy=false
 
 - name: link the binaries
   file: >
@@ -49,7 +50,7 @@
   when: download_sbt|changed
   template: >
     src=sbt.j2
-    dest=~/managed-bin/sbt
+    dest={{ home }}/managed-bin/sbt
     mode=755
     owner={{ ansible_user_id }}
     force=yes

@@ -18,10 +18,59 @@
   sudo: yes
   apt : pkg={{ item }} state=installed
   with_items:
-    - mosh
-    - git
-    - mercurial
+    - autoconf
+    - automake
     - bash
     - bash-completion
+    - bison
+    - bsdtar
+    - build-essential
+    - bzr
+    - curl
+    - exuberant-ctags
+    - gcc
+    - gettext
+    - git
+    - git-core
+    - inotify-tools
+    - iptables
+    - libbz2-dev
+    - libc6-dev
+    - libevent-dev
+    - libgtk2.0-dev
+    - libncurses5-dev
+    - libreadline-dev
+    - libreadline6
+    - libreadline6-dev
+    - libsqlite3-0
+    - libsqlite3-dev
+    - libssl-dev
+    - libtool
+    - libxml2-dev
+    - libxslt1-dev
+    - libyaml-dev
     - locate
+    - mercurial
+    - mosh
+    - mysql-client
+    - mysql-server
+    - openssl
+    - postgresql
+    - postgresql-client
+    - postgresql-contrib
+    - python-dev
+    - python-setuptools
+    - sqlite3
+    - subversion
+    - unixodbc-dev
+    - wget
+    - zlib1g
+    - zlib1g-dev
 
+- name: remove some stupid packages
+  sudo: yes
+  apt : pkg={{ item }} state=absent
+  with_items:
+    - apache2.2-common
+    - libperl-dev
+    - libperl5.14

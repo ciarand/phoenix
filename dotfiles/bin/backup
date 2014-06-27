@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "$(date +%F\ %T)": Beginning back up of $2
+# /usr/local/bin/tarsnap -c -f $1-$(date +%F) $2
+echo "$(date +%F\ %T)": Completed back up of $2

@@ -2,37 +2,38 @@
 - name: grab the lua source
   get_url: >
     url=http://www.lua.org/ftp/lua-5.2.3.tar.gz
-    dest=/tmp/lua_source.tar.gz
+    dest={{ lua_tar_location }}
 
 - name: get a checksum from the source
   changed_when: false
   register: lua_retrieved_checksum
-  shell: md5sum /tmp/lua_source.tar.gz
+  shell: md5sum {{ lua_tar_location }}
 
 - name: fail if the checksums don't match
   when: '"dc7f94ec6ff15c985d2d6ad0f1b35654" not in lua_retrieved_checksum.stdout'
   fail: "Checksums don't match"
 
 - name: make sure src/lua exists
-  file: path=~/src/lua state=directory
+  file: path={{ home }}/src/lua state=directory
 
 - name: unarchive the file
   unarchive: >
-    creates=~/src/lua/lua-5.2.3/Makefile
-    dest=~/src/lua/
-    src=/tmp/lua_source.tar.gz
+    creates={{ home }}/src/lua/lua-5.2.3/Makefile
+    dest={{ home }}/src/lua/
+    src={{ lua_tar_location }}
+    copy=false
 
 - name: configure and make
   register: build_lua
   when: os_family == "Darwin"
-  shell: cd ~/src/lua/lua-5.2.3 && make macosx creates=~/src/lua/lua-5.2.3/src/lua
+  shell: cd {{ home }}/src/lua/lua-5.2.3 && make macosx creates={{ home }}/src/lua/lua-5.2.3/src/lua
 
 - name: configure and make
   register: build_lua
   when: os_family != "Darwin"
-  shell: cd ~/src/lua/lua-5.2.3 && make linux creates=~/src/lua/lua-5.2.3/src/lua
+  shell: cd {{ home }}/src/lua/lua-5.2.3 && make linux creates={{ home }}/src/lua/lua-5.2.3/src/lua
 
 - name: install
   when: build_lua|changed
   sudo: yes
-  shell: cd ~{{ ansible_user_id }}/src/lua/lua-5.2.3 && make install
+  shell: cd {{ home }}/src/lua/lua-5.2.3 && make install

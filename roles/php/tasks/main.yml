@@ -10,7 +10,7 @@
 - name: grab phpbrew from the internet
   get_url: >
     url=https://raw.github.com/c9s/phpbrew/master/phpbrew
-    dest=~/managed-bin/phpbrew
+    dest={{ home }}/managed-bin/phpbrew
     mode=755
   register: get_phpbrew
 
@@ -21,7 +21,7 @@
 - name: copy the source phpbrew thing
   copy: >
     src=99_phpbrew.bash
-    dest=~/.bash.d/99_phpbrew.bash
+    dest={{ home }}/.bash.d/99_phpbrew.bash
 
 - name: check which phps we have installed
   register: installed_phps

@@ -1,23 +1,23 @@
 - name: clone plenv
   git: >
     repo=https://github.com/tokuhirom/plenv.git
-    dest=~/.plenv
+    dest={{ home }}/.plenv
 
 - name: install the 99_perlbrew.bash file
-  copy: src=99_perlbrew.bash dest=~/.bash.d/
+  copy: src=99_perlbrew.bash dest={{ home }}/.bash.d/
 
 - name: install perl-build
   git: >
     repo=https://github.com/tokuhirom/Perl-Build.git
-    dest=~/.plenv/plugins/perl-build/
+    dest={{ home }}/.plenv/plugins/perl-build/
 
 - name: install plenv-contrib
   git: >
     repo=https://github.com/miyagawa/plenv-contrib.git
-    dest=~/.plenv/plugins/plenv-contrib/
+    dest={{ home }}/.plenv/plugins/plenv-contrib/
 
 - name: install some perls
-  shell: bash -lc "plenv install {{ item }}" creates=~/.plenv/versions/{{ item }}
+  shell: bash -lc "plenv install {{ item }}" creates={{ home }}/.plenv/versions/{{ item }}
   with_items:
     - 5.15.9
     - 5.17.11
@@ -25,7 +25,7 @@
     - 5.21.0
 
 - name: set the global perl
-  shell: bash -lc "plenv global 5.21.0" creates=~/.plenv/version
+  shell: bash -lc "plenv global 5.21.0" creates={{ home }}/.plenv/version
 
 - name: install cpanm
-  shell: bash -lc "plenv install-cpanm" creates=~/.plenv/versions/5.21.0/bin/cpanm
+  shell: bash -lc "plenv install-cpanm" creates={{ home }}/.plenv/versions/5.21.0/bin/cpanm

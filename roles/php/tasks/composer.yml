@@ -1,19 +1,19 @@
 - name: create the composer directory if it doesn't exist
   file: >
-    path=~{{ ansible_user_id }}/.composer/vendor
+    path={{ home }}/.composer/vendor
     state=directory
 
-- name: link ~/.composer/vendor/bin to managed-bin
+- name: link {{ home }}/.composer/vendor/bin to managed-bin
   file: >
-    src=~{{ ansible_user_id }}/managed-bin
-    dest=~{{ ansible_user_id }}/.composer/vendor/bin
+    src={{ home }}/managed-bin
+    dest={{ home }}/.composer/vendor/bin
     state=link
 
 - name: symlink the composer.json and composer.lock files
   # until we can figure out better pathing support, this is a hack
   file: >
-    src={{ inventory_dir }}/../dotfiles/php/composer.{{ item }}
-    dest=~/.composer/composer.{{ item }}
+    src={{ config_dir }}/dotfiles/php/composer.{{ item }}
+    dest={{ home }}/.composer/composer.{{ item }}
     state=link
   with_items:
     - lock
@@ -22,7 +22,7 @@
 - name: grab composer
   shell: >
     bash -lc "phpbrew switch {{ item.version }} && phpbrew install-composer"
-    creates=~/.phpbrew/.phpbrew/bin/composer
+    creates={{ home }}/.phpbrew/.phpbrew/bin/composer
   with_items:
     - "{{ php_versions | last }}"
 

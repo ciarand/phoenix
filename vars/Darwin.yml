@@ -1,1 +1,2 @@
 os_family: Darwin
+home: /Users/{{ ansible_user_id }}

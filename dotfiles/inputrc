@@ -14,3 +14,16 @@ set completion-ignore-case on
 # moving to begining and end of line (using F1 and F2)
 "\eOP": beginning-of-line
 "\eOQ": end-of-line
+
+set completion-ignore-case On
+set bell-style none
+set editing-mode vi
+
+$if mode=vi
+    set keymap vi-command
+    "gg": beginning-of-history
+    "G": end-of-history
+    set keymap vi-insert
+    "jk": vi-movement-mode
+    "\C-p": history-search-backward
+    "\C-l": clear-screen

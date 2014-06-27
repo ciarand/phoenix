@@ -1,20 +1,20 @@
 - name: clone the luarocks source
   git: >
     repo=git://github.com/keplerproject/luarocks.git
-    dest=~/src/luarocks
+    dest={{ home }}/src/luarocks
     version=v2.1.2
 
 - name: configure and make luarocks
   register: luarocks_configuration
   shell: >
-    cd ~/src/luarocks && ./configure && make
-    creates=~/src/luarocks/config.unix
+    cd {{ home }}/src/luarocks && ./configure && make
+    creates={{ home }}/src/luarocks/config.unix
 
 #TODO figure out how to do this stuff without sudo
 - name: install luarocks
   when: luarocks_configuration|changed
   sudo: yes
-  shell: cd ~{{ ansible_user_id }}/src/luarocks && make install
+  shell: cd {{ home }}/luarocks && make install
 
 - name: get the list of currently installed rocks
   register: currently_installed_luarocks

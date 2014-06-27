@@ -1,2 +1,2 @@
 - name: Ensure that .ruby-version file exists
-  template: src=ruby-version dest=~{{ ansible_user_id }}/.ruby-version
+  template: src=ruby-version dest={{ home }}/.ruby-version

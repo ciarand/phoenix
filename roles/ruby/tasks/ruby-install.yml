@@ -1,5 +1,5 @@
 - name: Checks if target ruby is installed
-  command: "~{{ ansible_user_id }}/.rbenv/bin/rbenv versions"
+  command: "{{ home }}/rbenv versions"
   register: ruby_installed_versions
   changed_when: "ruby_installed_versions.stdout.find('{{ version }}') == -1"
 

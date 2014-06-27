@@ -2,4 +2,4 @@
   notify: install google fonts
   hg: >
     repo=https://code.google.com/p/googlefontdirectory/
-    dest=~/src/google-fonts
+    dest={{ home }}/src/google-fonts

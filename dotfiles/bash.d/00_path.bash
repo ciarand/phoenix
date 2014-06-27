@@ -1,5 +1,5 @@
 # reset the path
-PATH=""
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # source etc/profile if it exists
 [ -f /etc/profile ] && source /etc/profile

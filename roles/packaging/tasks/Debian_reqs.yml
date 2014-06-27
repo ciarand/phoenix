@@ -23,17 +23,12 @@
   sudo: yes
   apt: pkg={{ item }}
   with_items:
-    - spotify-client
-    - gnome-tweak-tool
+    # http://roger.steneteg.org/410/spotify-on-debian-wheezy/
+    #- spotify-client
     - chromium-browser
-    - chromium-codecs-ffmpeg-extra
     - paprefs
     - pulseaudio
     - pulseaudio-module-raop
-    - inotify-tools
-    - pidgin
-    - pidgin-extprefs
-    - pidgin-mpris
-    - pidgin-themes
-    - pidgin-privacy-please
-    - pidgin-plugin-pack
+    - bitlbee-libpurple
+    - finch
+    - finch-dev

@@ -2,10 +2,10 @@
   notify: install powerline fonts
   git: >
     repo=https://github.com/Lokaltog/powerline.git
-    dest=~/src/powerline
+    dest={{ home }}/src/powerline
 
 - name: clone the powerline-fonts repo
   notify: install powerline fonts
   git: >
-    repo=git@github.com:Lokaltog/powerline-fonts.git
-    dest=~/src/powerline-fonts
+    repo=https://github.com/Lokaltog/powerline-fonts.git
+    dest={{ home }}/src/powerline-fonts

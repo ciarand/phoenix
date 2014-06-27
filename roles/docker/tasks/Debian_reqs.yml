@@ -4,11 +4,6 @@
   sudo: yes
   with_items:
     - lxc
-    - wget
-    - bsdtar
-    - iptables
-    - curl
-    - git
     - aufs-tools
     - libdevmapper-dev
 

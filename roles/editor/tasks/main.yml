@@ -11,19 +11,19 @@
 - include: compile.yml
 
 - name: install vimrc
-  template: src=dotfiles/{{ item.src }} dest=~{{ ansible_user_id }}/{{ item.dest }}
+  template: src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
   with_items:
     - { src: 'vimrc', dest: '.vimrc' }
 
 - name: install vimrc.d
-  synchronize: src=dotfiles/{{ item.src }} dest=~/{{ item.dest }}
+  synchronize: src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
   with_items:
     - { src: 'vimrc.d/', dest: '.vimrc.d' }
 
 - name: Grab Vundle from Github
   git: >
     repo=git://github.com/gmarik/Vundle.vim.git
-    dest=~{{ ansible_user_id }}/.vim/bundle/Vundle.vim
+    dest={{ home }}/Vundle.vim
 
 - name: Run Vundle's PluginInstall to grab the latest
-  shell: cd; bash -lc "vim +PluginInstall +qall" creates=~/.vim/bundle
+  shell: cd; bash -lc "vim +PluginInstall +qall" creates={{ home }}/.vim/bundle
