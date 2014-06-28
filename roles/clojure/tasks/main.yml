@@ -16,11 +16,20 @@
     dest={{ home }}/src/lein
     version=2.3.4
 
+- name: delete the old version of lein from managed-bin
+  when: clone_leiningen|changed
+  file: path={{ home }}/managed-bin/lein state=absent
+
 - name: copy the bin script in
   register: copy_leiningen
-  copy: >
-    src="{{ home }}/src/lein/bin/lein"
-    dest="{{ home }}/managed-bin/lein"
+  command: >
+    cp {{ home }}/src/lein/bin/lein {{ home }}/managed-bin/lein
+    creates={{ home }}/managed-bin/lein
+
+- name: chmod +x the bin script
+  when: copy_leiningen|changed
+  file: >
+    path="{{ home }}/managed-bin/lein"
     mode=755
     owner={{ ansible_user_id }}
 
