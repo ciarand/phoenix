@@ -61,44 +61,37 @@ What does it do?
 
 Wishlist
 --------
-- Better checking for "changed" stuff
+
+### Languages / Platforms
+
+- Docker
+- Node
+- .NET / C#
+- Haskell
+- Erlang
+- Elixir
+
+### Meta helpers
 
 - Quicker git repo checks; making an HTTP request takes too long
+- Maybe mirror some of the aptitude packages?
 
-- Setup a working Docker environment
+### System services / setup
 
-- Setup a working Node environment with nvm
-
-- Maybe setup a working .NET environment
-
-- Check to make sure all required services are enabled
-
-- Setup any cron jobs that need setting up
-
-- Setup tarsnap
-
+- Tarsnap
 - Figure out a way of handling private-key transfers
 
-- Add some desktop-specific settings (awesomewm)
+### User services / setup
 
+- AwesomeWM
 - Conky
-
-- Desktop background
-
-- Nicer, actionable notifications
-
+- Synchronized desktop background
 - Airplay or similar? Maybe using Raspberry Pi
-
 - Switch to luakit browser, customize it
-
 - Bitlbee
-
 - Figure out how to handle irssi auth
-
 - Better password security (convert 1password to password-store?)
-
 - Either setup mutt or find a cross platform email solution
-
 - Change shell prompt to show hostname
 
 Complaints about current Linux distros I've developed along the way
