@@ -7,7 +7,7 @@
 
 - name: clean the tmux src folder
   when: clone_tmux|changed
-  shell: cd {{ home }}/src/tmux && bash -lc "make clean"
+  command: "cd {{ home }}/src/tmux && rm -f *.o tmux"
 
 - name: configure and make tmux
   register: build_tmux
