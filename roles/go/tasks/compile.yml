@@ -4,9 +4,9 @@
 - name: Grab the source via mercurial
   hg: >
     repo=https://code.google.com/p/go
-    dest={{ home }}/go
+    dest={{ home }}/src/go
     revision={{ go_version_target }}
 
 - name: Build the source
-  shell: cd {{ home }}/all.bash"
+  shell: cd {{ home }}/src/go/src && ./all.bash
 

@@ -19,8 +19,8 @@
 - name: copy the bin script in
   register: copy_leiningen
   copy: >
-    src={{ home }}/src/lein/bin/lein
-    dest={{ home }}/managed-bin/lein
+    src="{{ home }}/src/lein/bin/lein"
+    dest="{{ home }}/managed-bin/lein"
     mode=755
     owner={{ ansible_user_id }}
 

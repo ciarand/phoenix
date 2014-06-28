@@ -16,5 +16,5 @@
 - name: install luajit
   when: compile_luajit|changed
   sudo: yes
-  shell: cd {{ home }}/luajit && make install
+  shell: cd {{ home }}/src/luajit && make install
 

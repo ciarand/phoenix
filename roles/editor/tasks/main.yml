@@ -11,14 +11,9 @@
 - include: compile.yml
 
 - name: install vimrc
-  template: src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
+  copy: src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
   with_items:
     - { src: 'vimrc', dest: '.vimrc' }
-
-- name: install vimrc.d
-  synchronize: src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
-  with_items:
-    - { src: 'vimrc.d/', dest: '.vimrc.d' }
 
 - name: Grab Vundle from Github
   git: >

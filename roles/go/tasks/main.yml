@@ -3,7 +3,7 @@
   include_vars: "main.yml"
 
 - name: Register the current Go version (if any)
-  command: {{ home }}/go version
+  command: "{{ home }}/go version"
   ignore_errors: yes
   register: go_version
   changed_when: false
