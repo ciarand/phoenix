@@ -14,7 +14,7 @@
 - include: luajit.yml
 
 # not working
-#- include: luarocks.yml
+- include: luarocks.yml
 
 # not working
 #- include: luakit.yml

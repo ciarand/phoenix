@@ -1,30 +1,38 @@
+- name: make sure there's a ~/.lua/luarocks/ folder
+  file: path={{ home }}/.lua/luarocks state=directory
+
 - name: clone the luarocks source
   git: >
     repo=git://github.com/keplerproject/luarocks.git
     dest={{ home }}/src/luarocks
     version=v2.1.2
 
-- name: configure and make luarocks
+- name: configure luarocks
   register: luarocks_configuration
   shell: >
-    cd {{ home }}/src/luarocks && ./configure && make
-    creates={{ home }}/src/luarocks/config.unix
+    cd {{ home }}/src/luarocks && ./configure --versioned-rocks-dir
 
-#TODO figure out how to do this stuff without sudo
 - name: install luarocks
-  when: luarocks_configuration|changed
   sudo: yes
-  shell: cd {{ home }}/luarocks && make install
+  when: luarocks_configuration|changed
+  shell: cd {{ home }}/src/luarocks && make install
 
 - name: get the list of currently installed rocks
   register: currently_installed_luarocks
   changed_when: false
   shell: luarocks list
 
+- name: copy the bash script into bash.d
+  copy: >
+    src=99_lua.bash
+    dest={{ home }}/.bash.d/99_lua.bash
+    mode=700 owner={{ ansible_user_id }}
+    force=yes
+
 - name: install some cool rocks
   when: item not in currently_installed_luarocks.stdout
-  sudo: yes
-  shell: luarocks install {{ item }}
+  shell: bash -lc "luarocks install --local {{ item }}"
   with_items:
     - busted
     - luafilesystem
+
