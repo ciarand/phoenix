@@ -1,8 +1,13 @@
 - name: Install common packages on Darwin
   homebrew: name={{ item }} state=present
   with_items:
-    - mosh
-    - git
     - bash
     - bash-completion
-
+    - ctags
+    - git
+    - mercurial
+    - mosh
+    - perl518
+    - python
+    - python3
+    - tcl-tk

@@ -15,10 +15,22 @@
   # latest is safe b/c fedora is conservative (i.e. old)
   yum: name={{ item }} state=latest
   with_items:
-    - mosh
-    # need to upgrade vim-minimal before you're allowed to install vim-enhanced
-    - the_silver_searcher
-    - git
     - bash
     - bash-completion
-
+    - ctags
+    - git
+    - lua-devel
+    - luajit
+    - luajit-devel
+    - mercurial
+    - mosh
+    - perl
+    - perl-ExtUtils-CBuilder
+    - perl-ExtUtils-ParseXS
+    - perl-ExtUtils-XSpp
+    - python
+    - python-devel
+    - python3
+    - python3-devel
+    - tcl-devel
+    - the_silver_searcher
