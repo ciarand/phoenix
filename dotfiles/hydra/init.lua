@@ -1,13 +1,98 @@
+--[[----------------------------------------------------------------------------
+-- init.lua - A Hydra config
+--
+--  * API docs    : http://sdegutis.github.io/hydra/index.html
+--  * Github repo : https://github.com/sdegutis/hydra
+--
+--]]----------------------------------------------------------------------------
+
+
+--[[----------------------------------------------------------------------------
+-- Initialization
+--]]----------------------------------------------------------------------------
 hydra.alert("Hydra loaded", 1.0)
 
--- shortcuts
-local cmd = {"cmd"}
-local all = {"cmd", "ctrl", "alt"}
+--[[----------------------------------------------------------------------------
+-- Window management helper functions (namespaced to h)
+--]]----------------------------------------------------------------------------
+local h = {}
+
+-- a shortcut to retrieve the currently focused window
+h.win = function()
+    return window.focusedwindow()
+end
+
+-- a shortcut to retrieve the current "screen"
+h.screen = function()
+    return h.win():screen()
+end
+
+-- a shortcut to retrieve the current "frame"
+h.full_frame = function()
+    return h.screen():frame_including_dock_and_menu()
+end
+
+-- a shortcut to set the currently focused window's frame
+h.set_frame = function(frame)
+    h.win():setframe(frame)
+end
+
+-- maximizes the currently focused window by setting its frame to the screen's
+local function maximize_window()
+    h.set_frame(h.full_frame())
+end
+
+-- adjusts the currently focused window according to the provided func
+h.adjust_win = function(fn)
+    h.set_frame(fn(h.full_frame()))
+end
+
+local function move_win_to_left()
+    h.adjust_win(function(frame)
+        frame.w = frame.w / 2
+        return frame
+    end)
+end
+
+local function move_win_to_right()
+    h.adjust_win(function(frame)
+        frame.w = frame.w / 2
+        frame.x = frame.w
+        return frame
+    end)
+end
+
+local function move_win_to_bottom()
+    h.adjust_win(function(frame)
+        frame.h = frame.h / 2
+        frame.y = frame.h
+        return frame
+    end)
+end
+
+local function move_win_to_top()
+    h.adjust_win(function(frame)
+        frame.h = frame.h / 2
+        return frame
+    end)
+end
+
+--[[----------------------------------------------------------------------------
+-- Shortcuts and key-bindings
+--]]----------------------------------------------------------------------------
+local cmd   = {"cmd"}
+local all   = {"cmd", "ctrl", "alt"}
+local combo = {"ctrl", "alt"}
 
 hotkey.bind(all, "R", repl.open)
 hotkey.bind(cmd, "HOME", hydra.reload)
 
--- hotkey.bind(cmd, 'M', ext.grid.maximize_window)
+hotkey.bind(combo, "M", maximize_window)
+hotkey.bind(combo, "LEFT", move_win_to_left)
+hotkey.bind(combo, "RIGHT", move_win_to_right)
+hotkey.bind(combo, "UP", move_win_to_top)
+hotkey.bind(combo, "DOWN", move_win_to_bottom)
+
 -- hotkey.bind({"cmd"}, "PAD1", generate_move_window_to_quad_func(1))
 -- hotkey.bind({"cmd"}, "PAD2", generate_move_window_to_quad_func(2))
 -- hotkey.bind({"cmd"}, "PAD3", generate_move_window_to_quad_func(3))
@@ -18,8 +103,9 @@ hotkey.bind(cmd, "HOME", hydra.reload)
 -- hotkey.bind({"cmd"}, "PAD8", generate_move_window_to_quad_func(8))
 -- hotkey.bind({"cmd"}, "PAD9", generate_move_window_to_quad_func(9))
 
-
---[[ LANGUAGE STRINGS ]]--
+--[[----------------------------------------------------------------------------
+-- Language strings for notifications and menus
+--]]----------------------------------------------------------------------------
 local messages = {
     updates = {
         is_available = {
@@ -37,30 +123,11 @@ local messages = {
     },
 }
 
---[[ UPDATES ]]--
--- save the time when updates are checked
-function check_for_updates()
-    updates.check()
-    settings.set("last_checked_for_updates", os.time())
-end
+--[[----------------------------------------------------------------------------
+-- Handling Hydra updates
+--]]----------------------------------------------------------------------------
 
--- check for updates every week
-timer.new(timer.weeks(1), check_for_updates):start()
-notify.register("show_update", show_update)
-
--- if this is your first time running Hydra, you're launching it more than a week later, check now
-local last_checked_for_updates = settings.get('last_checked_for_updates')
-local last_week = os.time() - timer.days(7)
-if last_checked_for_updates == nil or last_checked_for_updates <= last_week then
-    check_for_updates()
-end
-
--- show available updates
-local function show_update()
-    os.execute('open https://github.com/sdegutis/Hydra/releases')
-end
-
--- what to do when an update is checked
+-- what to do when an update is checked (attached to a hook near the end)
 local function handle_update_check(available)
     local msg
 
@@ -73,7 +140,28 @@ local function handle_update_check(available)
     notify.show(msg.title, msg.subtitle, msg.body, msg.tag)
 end
 
+-- show available updates in the browser
+local function show_update()
+    os.execute('open https://github.com/sdegutis/Hydra/releases')
+end
 
+-- check for any updates and set "last_checked" time
+local function check_for_updates()
+    updates.check()
+    settings.set("last_checked_for_updates", os.time())
+end
+
+local last_checked_for_updates = settings.get('last_checked_for_updates')
+local last_week = os.time() - timer.days(7)
+
+-- if we haven't checked in a while (1 week) let's check now
+if last_checked_for_updates == nil or last_checked_for_updates <= last_week then
+    check_for_updates()
+end
+
+--[[----------------------------------------------------------------------------
+-- Configuring the navbar menu
+--]]----------------------------------------------------------------------------
 local function navbar_menu()
     local titles = {[true] = "Install Update", [false] = "Check for Update..."}
     local funcs = {[true] = updates.install, [false] = check_for_updates}
@@ -88,19 +176,11 @@ local function navbar_menu()
     }
 end
 
--- maximize the current window
-local function maximize_window()
-    local win = window.focusedwindow()
-    win:setframe(win:screen():frame_without_dock_or_menu())
-end
-
-local function get_current_win_and_frame()
-    local win = window.focusedwindow()
-
-    return win, win:screen():frame_without_dock_or_menu()
-end
-
---[[ EXPORTS ]]--
+--[[----------------------------------------------------------------------------
+-- Lua exports (global vars and stuff)
+--]]----------------------------------------------------------------------------
 autolaunch.set(true)
 updates.available = handle_update_check
 menu.show(navbar_menu)
+timer.new(timer.weeks(1), check_for_updates):start()
+notify.register("show_update", show_update)
