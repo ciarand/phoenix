@@ -18,7 +18,7 @@
 - name: Installs rbenv bash file
   copy: >
     src=99_rbenv.bash
-    dest={{ home }}/99_rbenv.bash
+    dest={{ home }}/.bash.d/99_rbenv.bash
     mode=700 owner={{ ansible_user_id }}
     force=yes
 
