@@ -7,3 +7,5 @@ set -o vi
 
 # include all files in .bash.d
 for f in ~/.bash.d/*; do source $f; done
+
+[ -f ~/.bash_profile.local ] && source ~/.bash_profile.local
