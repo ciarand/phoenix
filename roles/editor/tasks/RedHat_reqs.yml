@@ -1,0 +1,10 @@
+- name: remove the old version of vim
+  sudo: yes
+  yum: name=vim state=absent
+
+- name: symlink xsubpp from /usr/bin to the perl dir
+  sudo: yes
+  file: >
+    src=/usr/bin/xsubpp
+    dest=/usr/share/perl5/ExtUtils/xsubpp
+    state=link

@@ -1,0 +1,7 @@
+- name: remove some stupid packages
+  sudo: yes
+  apt : pkg={{ item }} state=absent
+  with_items:
+    - apache2.2-common
+    - libperl-dev
+    - libperl5.14

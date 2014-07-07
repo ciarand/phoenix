@@ -14,11 +14,17 @@
   shell: bash -lc "plenv prefix"
   changed_when: false
 
+- name: register ruby_lib
+  register: ruby_bin
+  shell: bash -lc "rbenv which ruby"
+  changed_when: false
+
 - name: configure and compile the vim source
+  sudo: yes
   register: build_vim
   shell: >
-    bash -lc "cd {{ home }}/src/vim && make distclean && ./configure {{ vim_options }}"
-    creates={{ home }}/src/vim/src/auto/config.h
+    PERL_LIB={{ perl_lib.stdout }}/lib
+    bash -lc "cd {{ home }}/src/vim && make distclean && ./configure --with-ruby-command={{ ruby_bin.stdout }} {{ vim_options }}"
 
 - name: install the just-compiled vim bins
   when: build_vim|changed
