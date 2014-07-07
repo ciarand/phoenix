@@ -297,13 +297,12 @@ let g:netrw_cursor          = 0
 let b:netrw_lastfile        = 1
 let g:netrw_use_errorwindow = 0
 
+let g:airline_powerline_fonts = 1
+
 " Tagbar
 map <C-k><C-v> :TagbarToggle<CR>
 map <leader>v :TagbarOpen fjc<CR>:TagbarShowTag<CR>
 let g:tagbar_autofocus = 1
-
-" Per-project vimrc files
-let g:localrc_filename = ".local.vimrc"
 
 " Use AG (silver searcher) over anything else
 if executable('ag')
@@ -314,6 +313,8 @@ if executable('ag')
     " .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+nnoremap <silent> <leader>t :call VimuxRunLastCommand()<CR>
 
 " }}}
 
@@ -467,3 +468,8 @@ endfunction " }}}
 command! NyanMe call NyanMe()
 
 " }}}
+
+"" Local config (for OS or host-specific stuff)
+if filereadable(".vimrc.local")
+    source .vimrc.local
+endif
