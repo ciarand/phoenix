@@ -1,0 +1,8 @@
+- name: install required dependencies
+  homebrew: name={{ item }} state=present
+  with_items:
+    - "sqlite3"
+    # gtk+ isn't working in ansible brew and I know exactly why
+    # see: https://github.com/ansible/ansible/issues/7991
+    #- "gtk+"
+

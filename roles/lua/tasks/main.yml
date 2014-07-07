@@ -13,8 +13,6 @@
 # install luajit
 - include: luajit.yml
 
-# not working
 - include: luarocks.yml
 
-# not working
-#- include: luakit.yml
+- include: luakit.yml
