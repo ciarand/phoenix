@@ -31,7 +31,7 @@ debug-tags:
 
 local: TARGETS=local
 local:
-	ANSIBLE_TARGETS=${TARGETS} make install
+	TARGETS=${TARGETS} make install
 
 local-tags:
 	ARGS="--tags ${TAGS}" make local
@@ -41,7 +41,7 @@ local-tags-debug:
 
 local-debug: TARGETS=local
 local-debug:
-	ANSIBLE_TARGETS=${TARGETS} ${ANSIBLE_BIN} ${PLAYBOOK} ${DEBUG} ${ALL_FLAGS}
+	TARGETS=${TARGETS} ${ANSIBLE_BIN} ${PLAYBOOK} ${DEBUG} ${ALL_FLAGS}
 
 ssh-key:
 	ssh-copy-id -i ~/.ssh/id_rsa.pub ciarand@${TARGET}
