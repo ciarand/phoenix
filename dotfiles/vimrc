@@ -304,6 +304,10 @@ map <C-k><C-v> :TagbarToggle<CR>
 map <leader>v :TagbarOpen fjc<CR>:TagbarShowTag<CR>
 let g:tagbar_autofocus = 1
 
+" Tabular patterns
+AddTabularPattern 1=    /^[^=]*\zs=
+AddTabularPattern 1==   /^[^=]*\zs=/r0c0l0
+
 " Use AG (silver searcher) over anything else
 if executable('ag')
     " Use Ag over Grep
