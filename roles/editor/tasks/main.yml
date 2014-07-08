@@ -8,7 +8,7 @@
 - include: compile.yml
 
 - name: install vimrc
-  copy: src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
+  file: state=link src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
   with_items:
     - { src: 'vimrc', dest: '.vimrc' }
 
