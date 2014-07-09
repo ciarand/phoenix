@@ -77,31 +77,28 @@ local function move_win_to_top()
     end)
 end
 
+local function move_win_to_next_screen()
+    h.set_frame(h.screen():next():frame_without_dock_or_menu())
+end
+
 --[[----------------------------------------------------------------------------
 -- Shortcuts and key-bindings
 --]]----------------------------------------------------------------------------
-local cmd   = {"cmd"}
-local all   = {"cmd", "ctrl", "alt"}
 local combo = {"ctrl", "alt"}
 
-hotkey.bind(all, "R", repl.open)
-hotkey.bind(cmd, "HOME", hydra.reload)
+-- repl
+hotkey.bind(combo, "R", repl.open)
+-- reload config
+hotkey.bind(combo, "HOME", hydra.reload)
 
-hotkey.bind(combo, "M", maximize_window)
-hotkey.bind(combo, "LEFT", move_win_to_left)
-hotkey.bind(combo, "RIGHT", move_win_to_right)
-hotkey.bind(combo, "UP", move_win_to_top)
-hotkey.bind(combo, "DOWN", move_win_to_bottom)
+-- vimish commands
+hotkey.bind(combo, "H", move_win_to_left)
+hotkey.bind(combo, "L", move_win_to_right)
+hotkey.bind(combo, "K", move_win_to_top)
+hotkey.bind(combo, "J", move_win_to_bottom)
 
--- hotkey.bind({"cmd"}, "PAD1", generate_move_window_to_quad_func(1))
--- hotkey.bind({"cmd"}, "PAD2", generate_move_window_to_quad_func(2))
--- hotkey.bind({"cmd"}, "PAD3", generate_move_window_to_quad_func(3))
--- hotkey.bind({"cmd"}, "PAD4", generate_move_window_to_quad_func(4))
--- hotkey.bind({"cmd"}, "PAD5", ext.grid.maximize_window())
--- hotkey.bind({"cmd"}, "PAD6", generate_move_window_to_quad_func(6))
--- hotkey.bind({"cmd"}, "PAD7", generate_move_window_to_quad_func(7))
--- hotkey.bind({"cmd"}, "PAD8", generate_move_window_to_quad_func(8))
--- hotkey.bind({"cmd"}, "PAD9", generate_move_window_to_quad_func(9))
+hotkey.bind(combo, "SPACE", maximize_window)
+hotkey.bind(combo, "N", move_win_to_next_screen)
 
 --[[----------------------------------------------------------------------------
 -- Language strings for notifications and menus
