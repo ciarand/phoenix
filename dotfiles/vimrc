@@ -15,39 +15,43 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Plugin 'sheerun/vim-polyglot'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'benmills/vimux'
-Plugin 'bling/vim-airline'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'ervandew/supertab'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
+
+" tools
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'benmills/vimux'
 Plugin 'godlygeek/tabular'
-Plugin 'lepture/vim-jinja'
-Plugin 'majutsushi/tagbar'
-Plugin 'mhinz/vim-signify'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'editorconfig/editorconfig-vim'
+
+" ui
+Plugin 'bling/vim-airline'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'mhinz/vim-signify'
+
+" syntaxes
+Plugin 'plasticboy/vim-markdown'
+Plugin 'fatih/vim-go'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'lepture/vim-jinja'
 Plugin 'xsbeats/vim-blade'
+Plugin 'cbracken/vala.vim'
 
 call vundle#end()
 
@@ -290,8 +294,8 @@ let g:syntastic_check_on_open            = 1
 let g:syntastic_debug_file               = '~/.syntastic.log'
 let g:syntastic_always_populate_loc_list = 1
 
-
-let g:neocomplete#enable_at_startup = 1
+let g:ycm_auto_trigger = 0
+let g:ycm_autoclose_preview_window_after_insertion = 0
 
 let g:netrw_cursor          = 0
 let b:netrw_lastfile        = 1
@@ -304,10 +308,6 @@ map <C-k><C-v> :TagbarToggle<CR>
 map <leader>v :TagbarOpen fjc<CR>:TagbarShowTag<CR>
 let g:tagbar_autofocus = 1
 
-" Tabular patterns
-AddTabularPattern 1=    /^[^=]*\zs=
-AddTabularPattern 1==   /^[^=]*\zs=/r0c0l0
-
 " Use AG (silver searcher) over anything else
 if executable('ag')
     " Use Ag over Grep
@@ -319,6 +319,10 @@ if executable('ag')
 endif
 
 nnoremap <silent> <leader>t :call VimuxRunLastCommand()<CR>
+
+let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
+
+nnoremap <silent> <leader>p :Unite file_rec/async -start-insert <CR>
 
 " }}}
 
@@ -470,6 +474,32 @@ function! NyanMe() " {{{
     redraw
 endfunction " }}}
 command! NyanMe call NyanMe()
+
+" }}}
+
+" Custom functions --------------------------------------------------------- {{{
+func! CleanUpPhpFormatting()
+    let save_cursor = getpos(".")
+
+    " we use spaces in the Real World
+    retab
+    " add a space after every comma that doesn't have one
+    silent! %s/\v,([^ ])/, \1/
+    " add a space after every // that doesn't have one
+    silent! %s/\v\/\/([^ ])/\/\/ \1/
+    " fix the one-line functions to have the brace on the next line
+    silent! %s/\v^(\s+)(\w+) function (\w+) *\((.*)\) ?\{/\1\2 function \3(\4)\r\1{/
+    " add a space before the hash rocket
+    silent! %s/\v([^ ])\=\>/\1 =>/
+    " add a space after the hash rocket
+    silent! %s/\v\=\>([^ ])/=> \1/
+    " cleanup well structured ifs
+    silent! %s/\vif ?\((.*)\) ?\{/if (\1) {/
+
+    " remove old history
+    call histdel('search', -1)
+    call setpos('.', save_cursor)
+endfunc
 
 " }}}
 
