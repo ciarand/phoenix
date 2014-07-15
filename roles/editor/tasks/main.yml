@@ -11,6 +11,8 @@
   file: state=link src=dotfiles/{{ item.src }} dest={{ home }}/{{ item.dest }}
   with_items:
     - { src: 'vimrc', dest: '.vimrc' }
+    - { src: 'vim/tabular_extras.vim',
+        dest: '.vim/bundle/tabular/after/plugin/tabular_extras.vim' }
 
 - name: Grab Vundle from Github
   git: >
