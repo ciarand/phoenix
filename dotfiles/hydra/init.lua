@@ -37,6 +37,12 @@ h.set_frame = function(frame)
     h.win():setframe(frame)
 end
 
+h.focus = function(name)
+    return function()
+        application.launchorfocus(name)
+    end
+end
+
 -- maximizes the currently focused window by setting its frame to the screen's
 local function maximize_window()
     h.set_frame(h.full_frame())
@@ -99,6 +105,8 @@ hotkey.bind(combo, "J", move_win_to_bottom)
 
 hotkey.bind(combo, "SPACE", maximize_window)
 hotkey.bind(combo, "N", move_win_to_next_screen)
+hotkey.bind(combo, ".", h.focus("iTerm"))
+hotkey.bind(combo, ",", h.focus("Google Chrome"))
 
 --[[----------------------------------------------------------------------------
 -- Language strings for notifications and menus
