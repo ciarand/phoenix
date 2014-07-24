@@ -12,17 +12,17 @@
   roles:
     - role: common
 
+    - role: shell
+      tags: ["dotfiles", "shell"]
+
+    - role: ciarand.dotfiles
+      tags: ["dotfiles"]
+
     - role: perl
       tags: ["perl"]
 
     - role: fonts
       tags: ["fonts"]
-
-    - role: shell
-      tags: ["dotfiles", "shell"]
-
-    - role: dotfiles
-      tags: ["dotfiles"]
 
     - role: editor
       tags: ["editor"]
