@@ -55,4 +55,7 @@ editor:
 editor-debug:
 	TAGS=editor make local-tags-debug
 
-.PHONY: install debug dotfiles dotfiles-debug go go-debug local tags ssh-key
+deps:
+	ansible-galaxy install -r reqs
+
+.PHONY: install debug dotfiles dotfiles-debug go go-debug local tags ssh-key deps
