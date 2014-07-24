@@ -1,7 +1,0 @@
-- name: install git completion on Darwin
-  copy: >
-    src=99_homebrew_git_completion.bash
-    dest={{ home }}/.bash.d/99_homebrew_git_completion.bash
-    mode=700 owner={{ ansible_user_id }}
-    force=yes
-

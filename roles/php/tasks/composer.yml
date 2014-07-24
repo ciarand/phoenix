@@ -9,16 +9,6 @@
     dest={{ home }}/.composer/vendor/bin
     state=link
 
-- name: symlink the composer.json and composer.lock files
-  # until we can figure out better pathing support, this is a hack
-  file: >
-    src={{ config_dir }}/dotfiles/php/composer.{{ item }}
-    dest={{ home }}/.composer/composer.{{ item }}
-    state=link
-  with_items:
-    - lock
-    - json
-
 - name: grab composer
   shell: >
     bash -lc "phpbrew switch {{ item.version }} && phpbrew install-composer"

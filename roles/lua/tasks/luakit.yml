@@ -5,10 +5,3 @@
     dest={{ home }}/src/luakit
     version=2012.09.13-r1
 
-- name: make the the binaries
-  shell: PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig cd {{ home }}/src/luakit && make clean && make USE_LUAJIT=1 USE_UNIQUE=0 CC=clang
-
-- name: install the binaries
-  sudo: yes
-  shell: cd {{ home }}/src/luakit && make install
-
