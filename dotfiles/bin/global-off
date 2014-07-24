@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-sudo mv /Applications/GlobalProtect{,OFF}.app && pkill -9 -f GlobalProtect

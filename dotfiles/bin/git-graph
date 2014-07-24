@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-git log --author="Author Name" --format=format:%ad --date=short | uniq -c | awk '{print $1}' | spark
