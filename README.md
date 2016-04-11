@@ -1,3 +1,5 @@
+This project is deprecated and unmaintained. Proceed with caution!
+
 Phoenix
 =======
 >A set of Ansible playbooks for configuring a development PC
